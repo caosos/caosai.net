@@ -1,0 +1,30 @@
+# Secrets
+.env
+.env.*
+*.env
+.credentials
+*.pem
+*.key
+token.json
+credentials.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Node
+node_modules/
+dist/
+build/
+coverage/
+
+# Editors / OS
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log
