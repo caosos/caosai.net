@@ -2,13 +2,15 @@
 
 ## Purpose
 
-A core CAOS requirement is that Aria must be able to work like the current ChatGPT build partner experience: inspect source material, reason over the build, create or modify files, commit changes, preserve receipts, document decisions, and continue bounded implementation without requiring Michael to manually perform every edit.
+A core CAOS requirement is that any authorized CAOS agent must be able to work like the current ChatGPT build partner experience when its lane, tools, permissions, and risk gates allow it: inspect source material, reason over the build, create or modify files, propose or commit changes, preserve receipts, document decisions, and continue bounded implementation without requiring Michael to manually perform every edit.
 
 This is one of the most important requirements in the system.
 
 ## Product requirement
 
-CAOS must support an agentic build/work mode where the AI can operate across connected tools and repositories under user-defined governance.
+CAOS must support agentic build/work modes where AI agents can operate across connected tools and repositories under user-defined governance.
+
+This capability is not limited to one persona name. Aria may be the primary user-facing intelligence, but specialized agents may use the same capability model inside their assigned lanes.
 
 The target behavior includes:
 
@@ -26,9 +28,17 @@ The target behavior includes:
 
 ## Why this matters
 
-Michael has wanted this capability since first using AI platforms. The goal is not merely conversation. The goal is a served, user-owned CAOS platform where Aria can help build, manage, inspect, and operate real work with tools, memory, receipts, and boundaries.
+Michael has wanted this capability since first using AI platforms. The goal is not merely conversation. The goal is a served, user-owned CAOS platform where authorized AI agents can help build, manage, inspect, and operate real work with tools, memory, receipts, and boundaries.
 
-Current external platforms provide some of this capability, but CAOS must eventually bring this into Michael's own hosted system.
+Current external platforms provide some of this capability, but CAOS must bring the same class of capability into Michael's own hosted system through clean native architecture.
+
+## Native capability principle
+
+CAOS should not force an inference engine or agent to behave unnaturally through brittle hacks.
+
+The platform should be designed around native capabilities exposed by the selected model/provider and tool environment. Where a provider supports tool use, structured outputs, file operations, repository operations, connectors, or agent workflows, CAOS should wrap those capabilities with governance, receipts, memory, ARC, and permission gates.
+
+The goal is to make CAOS a disciplined operating layer around native model/tool capabilities, not a pile of fragile simulations.
 
 ## Near-term reality
 
@@ -73,12 +83,13 @@ Required platform components include:
 - repository/file/document connectors
 - memory and ARC hydration
 - provider router
+- provider-native tool/action adapters
 - secrets stored outside GitHub/chat
 - admin observability
 - regression/feature locks
 
 ## Non-negotiable
 
-CAOS must eventually let Aria do real work like this session demonstrates, but with Michael's governance, receipts, hosted infrastructure, and safety gates.
+CAOS must eventually let authorized AI agents do real work like this session demonstrates, but with Michael's governance, receipts, hosted infrastructure, native capability adapters, and safety gates.
 
-The goal is not to copy a third-party platform. The goal is to build the CAOS-owned version of this capability cleanly and safely.
+The goal is not to copy a third-party platform. The goal is to build the CAOS-owned version of this capability cleanly, safely, and natively around the capabilities of the selected inference/tool environment.
