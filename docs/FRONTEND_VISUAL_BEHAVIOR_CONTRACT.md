@@ -4,18 +4,27 @@
 
 The CAOS rebuild should preserve the useful visible behaviors from the existing builds while improving color, layering, speed, modularity, and reliability.
 
-Base44 and Emergent are visual/behavior references. They are not code sources for this rebuild.
+Base44 and Emergent are both visual/behavior references. They are not code sources for this rebuild.
 
 ## Reference rule
 
-- Base44: reference for starfield depth, visible stars behind translucent chat surfaces, and some menu interaction patterns.
-- Emergent: reference for darker shell color direction, translucent header, and current working feature set.
+- Base44: feature-inventory and behavior evidence, plus visual reference for starfield depth, visible stars behind translucent chat surfaces, and selected menu interaction patterns.
+- Emergent: preferred final visual direction, especially darker shell color direction, translucent header, and current working feature set.
 - Final CAOS: combine the best behavior of both without copying code or preserving known UI mistakes.
+
+## Hard exclusions
+
+- Do not use Base44 code.
+- Do not recreate Base44's harsh opaque user bubble.
+- Do not bury the starfield under opaque foreground layers.
+- Do not silently drop features from either reference build without documenting intentional divergence.
+- Do not build frontend implementation until contracts, provenance, and acceptance criteria are documented.
 
 ## Global visual target
 
 - Dark mode is the preferred primary mode.
 - Light mode must exist as a supported alternate mode.
+- Emergent is the preferred final color direction.
 - Starfield/space background must remain visibly alive.
 - Foreground surfaces should use glass/translucent layering where readability allows.
 - UI should not bury the background under opaque panels unless the surface requires high readability.
@@ -79,6 +88,17 @@ The settings panel layout is acceptable as a reference, but color treatment shou
 - maintain readability and clear grouping
 - ensure toggles and controls remain legible in both dark and light modes
 
+## Public vs app surfaces
+
+Some CAOS surfaces will be login-gated. Public marketing/discoverability pages must describe those features without exposing private app data.
+
+Frontend implementation must distinguish:
+
+- public crawlable pages
+- authenticated app shell
+- admin-only surfaces
+- user-private memory/artifacts/tickets/connectors
+
 ## Screenshot/photo provenance
 
 Any screenshot used to justify implementation must record:
@@ -98,6 +118,18 @@ Any screenshot used to justify implementation must record:
 Existing major features and behaviors must be accounted for, even if redesigned visually.
 
 The rebuild may change colors, layout polish, and implementation, but it must not silently drop features.
+
+## Acceptance criteria
+
+A frontend slice is not accepted unless it documents:
+
+- source reference origin
+- behavior preserved
+- intentional visual divergence
+- regression risk
+- receipt/logging behavior where applicable
+- dark and light mode expectations
+- whether the surface is public, authenticated, or admin-only
 
 ## Non-negotiable
 
