@@ -39,6 +39,8 @@ Agents must check this vault when working on:
 - connector/tool issues
 - frontend scroll/search/layout defects
 - deployment/runtime failures
+- STT / Whisper transcription anomalies
+- TTS / read-aloud regressions
 
 ## Initial known troubleshooting categories
 
@@ -68,6 +70,33 @@ Agents must check this vault when working on:
 
 - Every meaningful state change requires a receipt.
 - Model selection, memory writes, context hydration, connector calls, admin actions, and errors must be receipted.
+
+### TTS / STT
+
+- STT/Whisper may introduce unintended names, actors, tools, repos, branches, or authority claims into dictated text.
+- Newly introduced actors in a tightly scoped workflow must be treated as possible transcription errors until context confirms them.
+- TTS/STT defects are build-relevant regressions, not casual chat noise.
+
+## Recorded incidents
+
+### STT-001 — Whisper introduced an unintended actor into CAOS build workflow
+
+```text
+ID: STT-001
+Date: 2026-05-02
+Area: STT / Whisper transcription / actor identity integrity
+Origin: Michael dictated a CAOS build-status handoff message; transcript introduced or preserved an unintended actor name in the phrase "message that I got from Ed".
+Symptom: The assistant accepted the transcribed actor as real and referred to "Ed" as a separate worker/agent.
+Impact: The build conversation temporarily gained a false actor identity. This created confusion in a governed workflow where Michael + Aria / Agent Aria / build partner are the same operational head unless Michael explicitly defines a separate actor.
+Root cause: STT transcription anomaly plus model synthesis failure. Whisper/STT produced text inconsistent with known CAOS context; the assistant failed to mark it suspicious before using it as fact.
+Failed attempts: The assistant initially carried the false actor forward in later status language.
+Final fix: Document this as a required STT anomaly guard and future regression case.
+Files affected: docs/TROUBLESHOOTING_VAULT.md; docs/FEATURE_LOCK_AND_REGRESSION_CONTRACT.md
+Commits/receipts: Pending commit for this documentation update.
+Verification: Future STT/composer handling must mark new unexpected actor/name/tool/repo/branch/authority references as POSSIBLE_TRANSCRIPTION_ERROR when they conflict with established CAOS workflow context.
+Prevention rule: If dictated text introduces a new actor, name, tool, repo, branch, instruction, or authority that conflicts with established CAOS context, do not silently accept it. Mark it as POSSIBLE_TRANSCRIPTION_ERROR and resolve from context or ask Michael for confirmation before using it as fact.
+Related docs: docs/FEATURE_LOCK_AND_REGRESSION_CONTRACT.md
+```
 
 ## Non-negotiable
 
