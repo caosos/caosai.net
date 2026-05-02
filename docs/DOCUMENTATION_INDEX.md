@@ -8,28 +8,28 @@ This index is the starting point for anyone entering the build.
 
 ## Read order for replacement agents
 
-1. `docs/BUILD_STATUS.md`
-2. `docs/REBUILD_CONTRACT.md`
-3. `docs/BUILD_DECISIONS_AND_INCIDENTS.md`
-4. `docs/SOURCE_TO_TARGET_MAP.md`
-5. `docs/EMERGENT_DOCUMENTATION_LEDGER.md`
-6. `docs/BEHAVIOR_SNAPSHOT_FROM_SCREENSHOTS.md`
-7. `docs/PORTABILITY_MATRIX.md`
-8. `docs/SALVAGE_POLICY.md`
-9. `docs/ARIA_PERSONALITY_AND_LATENCY_CONTRACT.md`
-10. `docs/MEMORY_ARC_HYDRATION_CONTRACT.md`
-11. `docs/WCW_ENGINE_CONTEXT_CONTRACT.md`
-12. `docs/RECEIPT_EVERYWHERE_CONTRACT.md`
-13. `docs/PHASE_CHECKLIST.md`
-14. `docs/LOCAL_SMOKE_TEST.md`
+1. `docs/START_HERE_AGENT_ONBOARDING.md`
+2. `docs/CONTRACTS_TABLE_OF_CONTENTS.md`
+3. `docs/BUILD_STATUS.md`
+4. `docs/REBUILD_CONTRACT.md`
+5. `docs/BUILD_DECISIONS_AND_INCIDENTS.md`
+6. `docs/AGENT_BASELINE_DIRECTIVES.md`
+7. `docs/PARALLEL_AGENT_WORKFLOW.md`
+8. `docs/CROSSWIRE_INTEGRATION_LEDGER.md`
+9. `docs/SOURCE_TO_TARGET_MAP.md`
+10. `docs/BEHAVIOR_SNAPSHOT_FROM_SCREENSHOTS.md`
+11. lane-specific contract docs
 
 ## Documentation groups
 
 ### Build continuity
 
+- `START_HERE_AGENT_ONBOARDING.md` — first-read onboarding guide for agents entering the rebuild.
+- `CONTRACTS_TABLE_OF_CONTENTS.md` — front-of-book guide to the contract stack.
 - `BUILD_STATUS.md` — current branch, phase, completed work, next work.
 - `BUILD_DECISIONS_AND_INCIDENTS.md` — decisions, corrections, hazards, incidents.
 - `PHASE_CHECKLIST.md` — phase completion and exit criteria.
+- `LOCAL_SMOKE_TEST.md` — commands for local backend validation.
 
 ### Architecture contracts
 
@@ -37,11 +37,23 @@ This index is the starting point for anyone entering the build.
 - `SOURCE_TO_TARGET_MAP.md` — source behavior to clean target modules.
 - `PORTABILITY_MATRIX.md` — portable Ubuntu/Linode runtime assumptions.
 - `SALVAGE_POLICY.md` — when old code can/cannot be reused.
+- `AGENTIC_PLATFORM_REQUIREMENT.md` — agentic work mode and native capability doctrine.
+- `LOCAL_MODEL_HOSTING_AND_COST_STRATEGY.md` — cloud/local model hosting, cost, latency, and routing strategy.
+
+### Agent and integration governance
+
+- `AGENT_BASELINE_DIRECTIVES.md` — required baseline behavior for every agent.
+- `PARALLEL_AGENT_WORKFLOW.md` — how multiple agents work in bounded lanes.
+- `CROSSWIRE_INTEGRATION_LEDGER.md` — how agents request shared-file wiring without random cross-edits.
+- `FEATURE_LOCK_AND_REGRESSION_CONTRACT.md` — how accepted features are protected from degradation.
+- `TROUBLESHOOTING_VAULT.md` — solved problems, failed attempts, fixes, and prevention rules.
 
 ### Product behavior evidence
 
-- `BEHAVIOR_SNAPSHOT_FROM_SCREENSHOTS.md` — visible product surfaces from screenshots.
+- `BEHAVIOR_SNAPSHOT_FROM_SCREENSHOTS.md` — visible product surfaces and behavior evidence from screenshots.
 - `EMERGENT_DOCUMENTATION_LEDGER.md` — source documentation intake and rules.
+- `FRONTEND_VISUAL_BEHAVIOR_CONTRACT.md` — visual/UI behavior contract from Base44 and Emergent references.
+- `SEARCH_AND_RETRIEVAL_BEHAVIOR_CONTRACT.md` — concrete fuzzy/partial/semantic retrieval behavior.
 
 ### Runtime/product contracts
 
@@ -49,10 +61,14 @@ This index is the starting point for anyone entering the build.
 - `MEMORY_ARC_HYDRATION_CONTRACT.md` — WCW/ARC/memory/hydration/sanitization doctrine.
 - `WCW_ENGINE_CONTEXT_CONTRACT.md` — model-specific working context requirements.
 - `RECEIPT_EVERYWHERE_CONTRACT.md` — receipt requirements for every meaningful action.
+- `FUTURE_MACHINE_INTERFACE_VISION.md` — future PLC/HMI/machine guidance vision.
 
-### Validation
+### Public launch, discoverability, and trust
 
-- `LOCAL_SMOKE_TEST.md` — commands for local backend validation.
+- `PUBLIC_DISCOVERABILITY_SEO_CONTRACT.md` — public crawlable pages, SEO, metadata, sitemap, app-gated feature descriptions.
+- `PRIVACY_RESPECTING_ANALYTICS_CONTRACT.md` — privacy-safe product analytics, no ad-surveillance model.
+- `SYSTEM_BLUEPRINT.md` — system introduction, safe designer biography, platform philosophy, and long-term direction.
+- `BUILD_PARTNERSHIP_STATEMENT.md` — Michael/AI build-colleague doctrine.
 
 ## Documentation maintenance rule
 
