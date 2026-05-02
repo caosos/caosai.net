@@ -15,17 +15,20 @@ Read in this order when entering the project:
 3. Source/reference evidence.
 4. Architecture and runtime contracts.
 5. Product behavior contracts.
-6. Validation, troubleshooting, and regression controls.
-7. Lane-specific implementation docs.
+6. Public launch, discoverability, analytics, and trust contracts.
+7. Validation, troubleshooting, and regression controls.
+8. Lane-specific implementation docs.
 
 ## Chapter 1 — Orientation
 
 | Contract | Purpose |
 |---|---|
+| `docs/START_HERE_AGENT_ONBOARDING.md` | First-read onboarding guide for future agents. |
 | `docs/DOCUMENTATION_INDEX.md` | Master documentation index and read order. |
 | `docs/BUILD_STATUS.md` | Current branch, phase, completed work, next work, and not-built-yet list. |
 | `docs/PHASE_CHECKLIST.md` | Phase completion criteria and exit gates. |
 | `docs/LOCAL_SMOKE_TEST.md` | Local backend smoke-test commands and expected results. |
+| `docs/SYSTEM_BLUEPRINT.md` | System introduction, safe designer biography, platform philosophy, and long-term direction. |
 
 ## Chapter 2 — Build Governance
 
@@ -37,6 +40,7 @@ Read in this order when entering the project:
 | `docs/PARALLEL_AGENT_WORKFLOW.md` | How multiple agents work in bounded lanes. |
 | `docs/CROSSWIRE_INTEGRATION_LEDGER.md` | How agents request shared-file wiring without editing shared files randomly. |
 | `docs/FEATURE_LOCK_AND_REGRESSION_CONTRACT.md` | How accepted features become locked and protected from regressions. |
+| `docs/BUILD_PARTNERSHIP_STATEMENT.md` | Defines Michael/AI colleague build-partner doctrine. |
 
 ## Chapter 3 — Source Evidence and Provenance
 
@@ -44,7 +48,8 @@ Read in this order when entering the project:
 |---|---|
 | `docs/SOURCE_TO_TARGET_MAP.md` | Maps source behavior and legacy salvage to clean target modules. |
 | `docs/EMERGENT_DOCUMENTATION_LEDGER.md` | Ensures Emergent documentation is inspected before rebuilding major lanes. |
-| `docs/BEHAVIOR_SNAPSHOT_FROM_SCREENSHOTS.md` | Preserves observed behavior from screenshots. |
+| `docs/BEHAVIOR_SNAPSHOT_FROM_SCREENSHOTS.md` | Preserves observed behavior and origin distinctions from screenshots. |
+| `docs/FRONTEND_VISUAL_BEHAVIOR_CONTRACT.md` | Defines Base44/Emergent visual behavior references and frontend acceptance rules. |
 | `docs/SALVAGE_POLICY.md` | Defines what may be salvaged, inspected, or excluded. |
 | `docs/TROUBLESHOOTING_VAULT.md` | Stores solved problems, failed attempts, fixes, and prevention rules. |
 
@@ -55,6 +60,8 @@ Read in this order when entering the project:
 | `docs/PORTABILITY_MATRIX.md` | Defines how CAOS runs outside Emergent/Base44 assumptions. |
 | `docs/WCW_ENGINE_CONTEXT_CONTRACT.md` | Defines model-specific WCW behavior and UI display requirements. |
 | `docs/RECEIPT_EVERYWHERE_CONTRACT.md` | Requires receipts for every meaningful system action. |
+| `docs/LOCAL_MODEL_HOSTING_AND_COST_STRATEGY.md` | Defines cloud/local model hosting, cost, latency, and routing strategy. |
+| `docs/AGENTIC_PLATFORM_REQUIREMENT.md` | Defines authorized agentic work mode and provider-native capability doctrine. |
 
 ## Chapter 5 — Aria Behavior and Intelligence
 
@@ -62,6 +69,7 @@ Read in this order when entering the project:
 |---|---|
 | `docs/ARIA_PERSONALITY_AND_LATENCY_CONTRACT.md` | Defines Aria's personality, proactivity, truth discipline, and latency doctrine. |
 | `docs/MEMORY_ARC_HYDRATION_CONTRACT.md` | Defines memory, ARC, WCW, hydration, sanitization, summaries, and truth-machine behavior. |
+| `docs/SEARCH_AND_RETRIEVAL_BEHAVIOR_CONTRACT.md` | Defines fuzzy, partial, body, metadata, semantic, and ranked retrieval expectations. |
 | `docs/FUTURE_MACHINE_INTERFACE_VISION.md` | Captures the long-term machine/HMI/PLC guidance vision. |
 
 ## Chapter 6 — Frontend and Visual Behavior
@@ -69,8 +77,17 @@ Read in this order when entering the project:
 | Contract | Purpose |
 |---|---|
 | `docs/FRONTEND_VISUAL_BEHAVIOR_CONTRACT.md` | Defines starfield, translucency, menus, scroll behavior, settings, thread search, and visual reference rules. |
+| `docs/BEHAVIOR_SNAPSHOT_FROM_SCREENSHOTS.md` | Ties screenshots to observable behavior, feature inventory, and implementation implications. |
+| `docs/PUBLIC_DISCOVERABILITY_SEO_CONTRACT.md` | Defines public crawlable pages, metadata, sitemap, robots, and app-gated feature descriptions. |
 
-## Chapter 7 — Validation and Regression
+## Chapter 7 — Public Launch, Trust, and Analytics
+
+| Contract | Purpose |
+|---|---|
+| `docs/PUBLIC_DISCOVERABILITY_SEO_CONTRACT.md` | Ensures CAOS is publicly understandable even when app features are login-gated. |
+| `docs/PRIVACY_RESPECTING_ANALYTICS_CONTRACT.md` | Defines product-metric analytics with no ad-surveillance, no selling user data, and no third-party behavioral profiling. |
+
+## Chapter 8 — Validation and Regression
 
 | Contract | Purpose |
 |---|---|
