@@ -41,6 +41,12 @@ Examples:
 
 This is a first-class CAOS behavior, not a convenience feature. It matters for Michael and for elderly/care users whose memory, word recall, or attention may be degraded.
 
+### Progressive memory trust
+
+Progressive memory trust is the process where repeated user confirmation of the same or equivalent memory pattern increases confidence and can eventually allow low-risk equivalent memories to be accepted automatically.
+
+This does not remove user control. It reduces repetitive confirmation burden for patterns the user has already approved multiple times.
+
 ## Memory model
 
 Memory must support many bins/categories, including:
@@ -82,6 +88,64 @@ Memory-worthy material includes:
 - recall-assist mappings from vague descriptions to precise project terms
 
 Memory should not be created just because a word appeared. Keyword occurrence is not memory significance.
+
+## Memory review and progressive auto-accept
+
+Memory review is a product-critical surface. Users should be able to see what CAOS thinks is important, confirm it, correct it, reclassify it, or forget it.
+
+Required review actions:
+
+- confirm / approve
+- edit / refine
+- reclassify bin/category
+- forget / remove
+- mark as counter/correction
+- add alias / alternate phrasing
+- correct an incorrect recall match
+
+Repeated confirmations should matter.
+
+If the user confirms the same or equivalent low-risk memory pattern multiple times, CAOS may increase trust in that pattern and eventually auto-accept future equivalent captures.
+
+Initial policy target:
+
+```text
+1st equivalent capture: pending review
+2nd equivalent capture: pending review with increased confidence
+3rd equivalent capture: eligible for auto-accept if low-risk and same category/pattern
+```
+
+Auto-accept eligibility requires:
+
+- same user scope
+- same or equivalent semantic pattern
+- low-risk category
+- no contradiction with active counter-memory
+- confidence above configured threshold
+- source/evidence retained
+- receipt generated
+- user setting allows progressive auto-accept
+
+Auto-accept must not apply by default to high-risk categories such as:
+
+- legal
+- medical
+- financial
+- safety-critical instructions
+- identity conflicts
+- credentials/secrets
+- external messaging authority
+- destructive/admin permissions
+- relationship-sensitive or highly personal claims unless explicitly allowed
+
+Even when auto-accepted, memory must remain user-governed:
+
+- visible in the memory console
+- reversible via forget/remove
+- editable
+- reclassifiable
+- capable of being countered/corrected
+- traceable through receipts/evidence
 
 ## Cognitive recall behavior
 
@@ -127,6 +191,8 @@ User controls should include:
 - mark as counter/correction
 - add alias / alternate phrasing
 - correct an incorrect recall match
+- enable/disable progressive auto-accept for eligible low-risk memory patterns
+- reset trust for a memory pattern if auto-accept becomes wrong or annoying
 
 The long-term goal is high-quality automated capture with user override, not passive dumping and not paralyzed manual-only capture.
 
@@ -146,6 +212,10 @@ Memory atoms and context segments should carry metadata, such as:
 - correction/supersession state
 - aliases / alternate phrasings
 - recall cues
+- confirmation count
+- auto_accept_eligible
+- auto_accept_reason
+- trust pattern ID
 
 For compressed/summarized work, summaries must preserve lineage. A compressed summary should know what thread, segment, or source material it came from.
 
@@ -161,6 +231,7 @@ Compression must:
 - preserve user intent
 - preserve receipts and commit references when relevant
 - preserve aliases and user-specific names for recurring concepts
+- preserve confirmation/correction signals relevant to progressive trust
 - avoid inventing conclusions
 - avoid smoothing over uncertainty
 
@@ -210,6 +281,7 @@ Every mature turn should answer:
 - Was memory used?
 - Was memory written?
 - Were tools used?
+- Was memory auto-accepted or queued for review?
 - Was the response local, provider-backed, or degraded?
 
 ## Implementation direction
@@ -220,6 +292,7 @@ Memory and ARC should be implemented through modular services:
 - memory_capture_service
 - memory_review_service
 - memory_relevance_service
+- memory_trust_service
 - arc_assembler
 - hydration_policy
 - sanitizer_service
@@ -230,4 +303,4 @@ Memory and ARC should be implemented through modular services:
 - alias_resolution_service
 - receipt_service
 
-No God-file memory engine. No full-context dumping. No keyword-only recall. No exact-name-only retrieval.
+No God-file memory engine. No full-context dumping. No keyword-only recall. No exact-name-only retrieval. No uncontrolled memory auto-accept.
