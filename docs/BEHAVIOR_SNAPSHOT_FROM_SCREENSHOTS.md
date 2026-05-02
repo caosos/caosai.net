@@ -2,9 +2,17 @@
 
 ## Purpose
 
-This document preserves the visible behavior evidence from Michael's uploaded CAOS screenshots so the rebuild can target actual product behavior instead of vague memory.
+This document preserves visible behavior evidence from Michael's uploaded CAOS screenshots so the rebuild can target actual product behavior instead of vague memory.
 
-The screenshots themselves were provided in ChatGPT conversation context. This document captures the durable working interpretation inside the GitHub build surface.
+Screenshots are evidence. They must be tagged by origin and translated into requirements before implementation.
+
+## Reference origins
+
+| Origin | Use |
+|---|---|
+| Base44 | Visual/behavior reference and feature-inventory evidence only. No code. Strong reference for starfield depth, translucency, and some menu flows. |
+| Emergent | Preferred visual direction and current working feature/behavior reference. No monolith copying. |
+| Current/new build | Implementation target and defect comparison surface. |
 
 ## Product domains observed
 
@@ -12,7 +20,7 @@ The screenshots themselves were provided in ChatGPT conversation context. This d
 |---|---|
 | `caosos.com` | Core CAOS platform |
 | `caoscare.com` | CAOS Care vertical |
-| `caostradings.com` | Trading/finance vertical |
+| `caostradings.com` | Trading/finance vertical concept |
 | `caosconnect.com` | Connector/integration vertical |
 
 ## Public and authentication flow
@@ -28,6 +36,7 @@ Rebuild implication:
 
 - Phase 1 uses development auth so testing is not blocked by Emergent OAuth.
 - Production auth remains pluggable and must be implemented through a dedicated auth adapter later.
+- Public crawlable pages must describe app-gated features so search engines and users can understand CAOS before login.
 
 ## Main chat shell
 
@@ -47,6 +56,21 @@ Rebuild implication:
 - Input/composer behavior is a first-class feature module.
 - Voice, attachments, quick thoughts, and provider selection must remain separate feature lanes.
 
+## Visual direction and starfield
+
+Observed distinction:
+
+- Base44 demonstrates stronger starfield visibility and depth behind translucent surfaces.
+- Emergent is preferred for darker shell direction, translucent header treatment, and overall color mood.
+
+Target:
+
+- Use Emergent as preferred final visual direction.
+- Preserve Base44-style starfield visibility/depth where appropriate.
+- Do not use Base44 code.
+- Do not preserve opaque user-message bubble treatment.
+- Message bubbles should be translucent, readable, and in the same visual family.
+
 ## WCW / context meter
 
 Observed surfaces:
@@ -59,6 +83,7 @@ Rebuild implication:
 - WCW is not cosmetic.
 - Backend must expose a context/receipt contract that explains measured or estimated context state.
 - UI should render from backend-provided contract, not private local guessing only.
+- WCW differs by inference engine and must appear in profile/settings, response receipts, and composer/model selector.
 
 ## Threads and search
 
@@ -74,6 +99,8 @@ Rebuild implication:
 - Threads require scoped persistence and user isolation.
 - Thread search must be scoped to the authenticated user/session.
 - Thread title generation must be preserved as a later service lane.
+- Thread search must support partial title match, multi-keyword match, fuzzy spelling tolerance, body/content match, metadata match, and semantic retrieval where available.
+- Users should not need exact wording to recover a thread.
 
 ## Memory console
 
@@ -90,6 +117,7 @@ Rebuild implication:
 - Promotion must be governed, not silent.
 - Admin/user controls must not bypass policy.
 - Legacy Plane B/session recall concepts are salvage references, not a direct storage copy.
+- Memory retrieval must be relevance-based, not exact-string-only.
 
 ## Admin dashboard
 
@@ -104,6 +132,7 @@ Rebuild implication:
 - Admin routes require server-side authorization.
 - Metrics must be backed by durable records, not UI mock state.
 - Diagnostics must be gated by admin role.
+- Analytics must be privacy-respecting and product-metric focused.
 
 ## Support tickets
 
@@ -162,6 +191,7 @@ Rebuild implication:
 
 - Docs panel should read from a controlled documentation source.
 - Admin/private docs must not leak to normal users.
+- Public docs/landing pages should explain product capabilities without exposing private app data.
 
 ## Behavioral priorities for rebuild
 
@@ -170,5 +200,7 @@ Rebuild implication:
 3. Durable records for memory, tickets, threads, artifacts, and receipts.
 4. Modular routes/services/schemas/adapters.
 5. Preserve visible CAOS behavior before cosmetic reinvention.
-6. No Base44 dependency.
+6. No Base44 code.
 7. No monolith mirror.
+8. Public crawlable pages included in launch plan.
+9. Privacy-respecting product analytics only; no ad-surveillance model.
