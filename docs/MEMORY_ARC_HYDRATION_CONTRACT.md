@@ -47,6 +47,14 @@ Progressive memory trust is the process where repeated user confirmation of the 
 
 This does not remove user control. It reduces repetitive confirmation burden for patterns the user has already approved multiple times.
 
+### Context sanity gate
+
+The context sanity gate is an LLM-side review step that checks whether incoming text, especially dictated or STT/Whisper text, appears internally inconsistent with known context.
+
+It works like a lightweight verification challenge: if a fragment seems off, impossible, out of character, authority-changing, or unrelated to the active workflow, CAOS must pause before treating it as fact.
+
+The gate does not accuse the user of error. It protects the workflow from transcription noise, hallucinated names, corrupted phrases, or accidental authority changes.
+
 ## Memory model
 
 Memory must support many bins/categories, including:
@@ -178,6 +186,53 @@ This behavior should support:
 - feature names and system concepts
 - safety-critical clarification when the wrong recalled item could cause harm
 
+## Context sanity behavior
+
+Incoming text must be checked against the active context before being treated as authoritative.
+
+This is especially important for dictated input, STT/Whisper transcripts, copied handoffs, and long operational messages.
+
+The context sanity gate should look for:
+
+- newly introduced actors or names that do not fit known workflow context
+- phrases that are grammatical but nonsensical in context
+- corrupted analogies or object names
+- repo, branch, domain, or tool names that conflict with established state
+- authority changes that Michael did not explicitly grant
+- instructions that contradict active governance rules
+- sudden high-risk actions embedded in otherwise casual speech
+- impossible or out-of-character claims
+
+Required handling:
+
+```text
+If confidence is high that the fragment is corrupted:
+  mark POSSIBLE_TRANSCRIPTION_ERROR
+  infer the likely intended meaning only when context strongly supports it
+  do not create durable memory from the corrupted phrase
+  do not create a new actor/authority/tool from the corrupted phrase
+
+If confidence is medium or low:
+  ask Michael a narrow clarification before acting
+
+If the fragment affects authority, identity, repo, branch, deployment, deletion, secrets, external messages, or real-world action:
+  stop and require explicit confirmation
+```
+
+Examples:
+
+```text
+Transcript: "message I got from Ed"
+Known context: no Ed exists in the CAOS build workflow
+Handling: mark POSSIBLE_TRANSCRIPTION_ERROR; do not create a new actor
+
+Transcript: "trinket and the head"
+Known context: user was describing mall directory stands/map kiosks
+Handling: mark POSSIBLE_TRANSCRIPTION_ERROR; resolve as mall directory kiosk only if context is strong
+```
+
+The context sanity gate should be implemented as a secondary prompt/check before memory capture, command execution, authority changes, or build-state mutation.
+
 ## User governance
 
 The system should support user review and correction of memory.
@@ -216,6 +271,9 @@ Memory atoms and context segments should carry metadata, such as:
 - auto_accept_eligible
 - auto_accept_reason
 - trust pattern ID
+- sanity_check_status
+- transcription_suspect
+- corrected_from
 
 For compressed/summarized work, summaries must preserve lineage. A compressed summary should know what thread, segment, or source material it came from.
 
@@ -232,6 +290,7 @@ Compression must:
 - preserve receipts and commit references when relevant
 - preserve aliases and user-specific names for recurring concepts
 - preserve confirmation/correction signals relevant to progressive trust
+- preserve STT/transcription anomaly corrections when relevant to future safety
 - avoid inventing conclusions
 - avoid smoothing over uncertainty
 
@@ -266,6 +325,7 @@ Required distinctions:
 - uncertain
 - degraded/partial
 - blocked
+- possible transcription error
 
 Aria can be warm, direct, funny, reflective, and human-useful without becoming dishonest or sycophantic. It should not put up with bullshit, including the user's bullshit, when truth requires correction.
 
@@ -282,6 +342,8 @@ Every mature turn should answer:
 - Was memory written?
 - Were tools used?
 - Was memory auto-accepted or queued for review?
+- Was a context sanity check run?
+- Was any fragment marked possible transcription error?
 - Was the response local, provider-backed, or degraded?
 
 ## Implementation direction
@@ -293,6 +355,8 @@ Memory and ARC should be implemented through modular services:
 - memory_review_service
 - memory_relevance_service
 - memory_trust_service
+- context_sanity_service
+- transcription_anomaly_service
 - arc_assembler
 - hydration_policy
 - sanitizer_service
@@ -303,4 +367,4 @@ Memory and ARC should be implemented through modular services:
 - alias_resolution_service
 - receipt_service
 
-No God-file memory engine. No full-context dumping. No keyword-only recall. No exact-name-only retrieval. No uncontrolled memory auto-accept.
+No God-file memory engine. No full-context dumping. No keyword-only recall. No exact-name-only retrieval. No uncontrolled memory auto-accept. No silent acceptance of context-breaking transcription artifacts.
