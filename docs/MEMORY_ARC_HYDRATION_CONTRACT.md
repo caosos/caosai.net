@@ -4,6 +4,8 @@
 
 CAOS memory is not keyword search and not a prompt dump. Memory is a governed relevance system that gives Aria durable continuity while keeping the working context fast, bounded, and truthful.
 
+A core purpose of CAOS memory is cognitive assist: helping Michael and future users recover the right word, document, feature, ticket, place, person, system concept, or prior decision when they can describe it but cannot immediately remember its exact name.
+
 ## Core vocabulary
 
 ### WCW — Working Context Window
@@ -25,6 +27,19 @@ Hydration must be selective. Aria should know capabilities exist without loading
 The process of cleaning, compressing, de-duplicating, bounding, and safety-filtering candidate context before it enters ARC.
 
 Sanitization must preserve meaning and truth. It must not destroy important nuance just to reduce tokens.
+
+### Cognitive recall assist
+
+Cognitive recall assist is the ability to recover a remembered target from partial, imprecise, descriptive, or circumstantial user language.
+
+Examples:
+
+- "that problem ticket book" -> `Troubleshooting Vault`
+- "the context window thing" -> `WCW / Working Context Window`
+- "the active context packet" -> `ARC / Active Relevant Context`
+- "that build rule about not accepting weird dictated names" -> `STT / Whisper anomaly guard`
+
+This is a first-class CAOS behavior, not a convenience feature. It matters for Michael and for elderly/care users whose memory, word recall, or attention may be degraded.
 
 ## Memory model
 
@@ -63,8 +78,41 @@ Memory-worthy material includes:
 - real-world operational context
 - safety/risk constraints
 - domain-specific vocabulary and intent
+- user-specific terminology and aliases for recurring concepts
+- recall-assist mappings from vague descriptions to precise project terms
 
 Memory should not be created just because a word appeared. Keyword occurrence is not memory significance.
+
+## Cognitive recall behavior
+
+When a user cannot remember the exact term but provides surrounding clues, CAOS should infer likely matches from memory, current project context, prior terminology, documents, and conversation state.
+
+Required behavior:
+
+- accept partial descriptions and circumstantial clues
+- search aliases, synonyms, nearby concepts, and prior references
+- return the likely target name plainly
+- include confidence when uncertain
+- distinguish verified memory from inference
+- avoid inventing a target when evidence is weak
+- ask a narrow clarification only when multiple plausible targets exist
+
+Expected pattern:
+
+```text
+User: "What's that problem ticket book called?"
+Aria: "Troubleshooting Vault. That's the build doc where solved problems, root causes, fixes, and prevention rules go."
+```
+
+This behavior should support:
+
+- project work
+- personal memory continuity
+- elder-care assistance
+- maintenance/workflow recall
+- document and ticket retrieval
+- feature names and system concepts
+- safety-critical clarification when the wrong recalled item could cause harm
 
 ## User governance
 
@@ -77,6 +125,8 @@ User controls should include:
 - edit/refine
 - forget/remove
 - mark as counter/correction
+- add alias / alternate phrasing
+- correct an incorrect recall match
 
 The long-term goal is high-quality automated capture with user override, not passive dumping and not paralyzed manual-only capture.
 
@@ -94,6 +144,8 @@ Memory atoms and context segments should carry metadata, such as:
 - user scope
 - relevance signals
 - correction/supersession state
+- aliases / alternate phrasings
+- recall cues
 
 For compressed/summarized work, summaries must preserve lineage. A compressed summary should know what thread, segment, or source material it came from.
 
@@ -108,6 +160,7 @@ Compression must:
 - preserve constraints
 - preserve user intent
 - preserve receipts and commit references when relevant
+- preserve aliases and user-specific names for recurring concepts
 - avoid inventing conclusions
 - avoid smoothing over uncertainty
 
@@ -173,6 +226,8 @@ Memory and ARC should be implemented through modular services:
 - summary_service
 - context_lineage_service
 - prompt_budget_service
+- recall_assist_service
+- alias_resolution_service
 - receipt_service
 
-No God-file memory engine. No full-context dumping. No keyword-only recall.
+No God-file memory engine. No full-context dumping. No keyword-only recall. No exact-name-only retrieval.
