@@ -2,50 +2,99 @@
 
 ## Purpose
 
-This document defines the migration path for taking ownership of the already-working CAOS system outside Emergent.
+This document defines the corrected ownership path for taking the already-working CAOS behavior out of hosted build-platform dependency and rebuilding it as clean, Michael-owned CAOS infrastructure.
 
-This is not a from-zero rebuild plan.
+This is not a from-zero product invention.
 
-Michael has already built working CAOS systems. The immediate objective is to move the working source under Michael-controlled server infrastructure, preserve behavior, and only then refactor.
+Michael has already built working CAOS systems on two external build platforms:
+
+```text
+1. Base44 / Deno serverless build reference
+2. Emergent full-stack build reference
+```
+
+The current Linode lane is the third build. Its purpose is to produce the cleanest, most owned, most modular CAOS implementation to date.
 
 ## Active lane
 
 ```text
-Lane: CAOS Core ownership migration
+Lane: CAOS Core clean ownership rebuild
 ```
 
-Do not mix this lane with CAOS Care migration. CAOS Care is separate.
+Do not mix this lane with CAOS Care migration unless Michael explicitly opens a CAOS Care work package.
 
-## Source of working behavior
+## Corrected controlling doctrine
+
+```text
+Do not deploy emergent-caos-build as the runtime target.
+Do not move the Emergent app as-is to Linode.
+Do not clone monolithic hosted-platform runtime code into production.
+Treat external platform builds as behavior/source evidence.
+Build clean owned modules in linode-repo.
+Wire clean modules through explicit orchestrators.
+Receipt every meaningful decision and change.
+```
+
+The old direct-deploy doctrine is superseded.
+
+## Source/reference repos
+
+### Emergent full-stack reference
 
 ```text
 Repository: caosos/emergent-caos-build
 Clone URL: https://github.com/caosos/emergent-caos-build.git
 Branch: main
-Role: Working CAOS source exported from Emergent build
+Role: Working full-stack behavior/source reference
 ```
 
-This repository contains the working CAOS app behavior and should be treated as the source to deploy first.
+This repository contains working CAOS behavior, but it is not the runtime deployment target for this lane.
 
-## Target ownership repo
+Use it to inspect:
+
+- existing product behavior
+- feature surfaces
+- backend service responsibilities
+- frontend component behavior
+- route/API shape
+- visual and interaction evidence
+- data/model assumptions
+- implementation hazards
+
+Do not copy monoliths wholesale.
+
+### Base44 / serverless reference
+
+Base44 remains a visual, behavioral, and feature-inventory reference where relevant.
+
+Use it to compare:
+
+- starfield and glass layering behavior
+- UI feature inventory
+- menu/settings/user-flow behavior
+- serverless-platform assumptions to avoid
+
+Do not use Base44 code.
+
+### Clean ownership target
 
 ```text
 Repository: caosos/linode-repo
 Branch: aria-emergent-clean-rebuild
-Role: Linode ownership/migration planning, doctrine, clean target architecture, and future controlled extraction workspace
+Role: Clean CAOS Core rebuild target, doctrine source, modular implementation workspace, and future ownership runtime source
 ```
 
-`linode-repo` is not the current working app source. It is the migration/control repo and clean target lane.
+All durable clean CAOS Core architecture should be built here.
 
 ## Server target
 
-Preferred production/runtime directory:
+Preferred future production/runtime directory:
 
 ```text
 /srv/caosos.com
 ```
 
-Do not place the working CAOS app under:
+Do not place the clean CAOS Core runtime under:
 
 ```text
 /home/michael-chambers/caos-a1
@@ -56,136 +105,166 @@ CAOS A1 is a separate legacy/project directory and must not be used as the paren
 ## Correct mental model
 
 ```text
-emergent-caos-build = working source to move
-linode-repo = migration/control/doctrine/clean target workspace
-/srv/caosos.com = server runtime target
+Base44 build = serverless visual/behavior/feature reference
+emergent-caos-build = full-stack working behavior/source reference
+linode-repo = clean owned CAOS Core implementation target
+/srv/caosos.com = future server runtime directory
 ```
 
 ## Migration principle
 
 ```text
-Move first. Verify behavior. Then refactor.
+Move behavior, not mess.
+Preserve proven behavior.
+Rebuild clean structure.
+Wire through orchestrators.
+Verify with receipts.
 ```
 
-Do not combine migration, refactor, redesign, provider changes, and frontend polish in one step.
+The goal is not to make a working copy of the Emergent build. The goal is to produce a cleaner third-generation CAOS build using the first two builds as evidence.
 
-## Phase 1 — Take server custody
+## Non-negotiable architecture rule
 
-Goal: run the current working CAOS source from `emergent-caos-build` on Michael-controlled Linode infrastructure.
+CAOS Core must be built from clean, isolated modules coordinated by explicit orchestrators.
 
-Steps:
-
-1. Create isolated server directory `/srv/caosos.com`.
-2. Clone `https://github.com/caosos/emergent-caos-build.git` into that directory.
-3. Create backend environment file from inspected requirements/config.
-4. Install backend dependencies.
-5. Install frontend dependencies.
-6. Configure MongoDB or existing database connection.
-7. Start backend locally on server.
-8. Build frontend locally on server.
-9. Serve frontend through Nginx.
-10. Add HTTPS through Let's Encrypt.
-11. Verify critical routes and UI behavior.
-
-## Phase 1 acceptance checks
-
-Minimum checks before refactor:
-
-- backend boots
-- database connection works
-- frontend builds
-- landing/auth shell loads
-- login/auth flow works or has exact failure receipt
-- chat page loads
-- admin docs route loads
-- support tickets/admin surface loads
-- memory console route loads
-- context/window meter surface loads if present
-- no Emergent runtime dependency blocks normal operation
-
-## Phase 2 — Environment and dependency map
-
-The working source requires inspection before server launch.
-
-Known required files to inspect:
-
-- `backend/server.py`
-- `backend/app/config.py`
-- `backend/requirements.txt`
-- `frontend/package.json`
-- frontend environment variables
-- backend environment variables
-- object storage configuration
-- auth/session configuration
-- connector/OAuth configuration
-- billing/webhook configuration
-- MongoDB configuration
-
-Important current finding:
-
-`backend/app/config.py` requires:
+Required pattern:
 
 ```text
-MONGO_URL
-DB_NAME
+inspect reference behavior
+-> map responsibilities
+-> define contract
+-> build clean module
+-> wire through orchestrator
+-> validate route/UI behavior
+-> receipt
+-> stop or proceed to next bounded unit
 ```
 
-It also reads optional:
+Forbidden pattern:
 
 ```text
-CORS_ORIGINS
+clone hosted-platform runtime
+-> deploy monolith
+-> patch around platform assumptions
+-> call it owned
 ```
 
-## Phase 3 — Server-to-GitHub custody loop
+## Module extraction model
 
-After the app runs on the server, CAOS must support a safe commit path back to GitHub.
+Reference source should be treated as a quarry for behavior contracts.
 
-Required feature:
+For each major source file or feature cluster, produce:
+
+- source path
+- observed responsibility
+- required behavior
+- clean target module(s)
+- orchestrator boundary
+- dependencies
+- acceptance criteria
+- what not to copy
+- verification receipt
+
+Example backend direction:
 
 ```text
-Commit Workspace to GitHub
+chat pipeline behavior
+-> context_sanity_service.py
+-> thin_state_service.py
+-> lane_state_service.py
+-> memory_ranking_service.py
+-> context_meter_service.py
+-> provider_router.py
+-> response_validator.py
+-> receipt_writer.py
+-> chat_orchestrator.py
 ```
 
-Minimum workflow:
-
-1. Inspect git status.
-2. Show changed files.
-3. Show diff.
-4. Generate commit message.
-5. Require Michael approval.
-6. Commit locally.
-7. Push selected branch to GitHub.
-8. Store receipt with commit SHA.
-
-Forbidden without explicit approval:
-
-- force push
-- delete repo directory
-- overwrite production database
-- rotate secrets
-- restart production service
-- deploy to production
-- change firewall
-- push to protected/main without review
-
-## Phase 4 — Refactor only after ownership
-
-Refactor begins only after the working app runs on Michael's server.
-
-Refactor workflow:
+Example frontend direction:
 
 ```text
-inspect
-map responsibility
-extract one piece
-preserve behavior
-test
-commit
-receipt
-stop
+chat shell behavior
+-> AppShell
+-> MessageList
+-> Composer
+-> ThreadSidebar
+-> SettingsPanel
+-> MemoryConsole
+-> ContextMeterPanel
+-> AdminDocsPanel
+-> SupportTicketsPanel
 ```
 
-Line policy:
+The orchestrator coordinates. It must not become another God file.
+
+## Phase 1 — Documentation and doctrine reconciliation
+
+Goal: ensure the book matches Michael's corrected direction before additional build work.
+
+Tasks:
+
+1. Read the documented contract stack.
+2. Identify docs that still imply direct Emergent runtime deployment.
+3. Correct old doctrine to this clean rebuild model.
+4. Record contradictions and supersessions where needed.
+5. Do not claim a doc is verified unless it has been inspected or searched for the specific issue.
+
+Acceptance checks:
+
+- This document no longer instructs direct deployment of `emergent-caos-build`.
+- Conflicting docs are either updated or explicitly marked pending correction.
+- Replacement agents can distinguish reference repos from target runtime source.
+
+## Phase 2 — Reference inventory
+
+Goal: inspect the working reference systems without migrating monoliths.
+
+Emergent source-reference targets include, subject to actual repo inspection:
+
+- backend application entrypoints
+- backend service files
+- chat pipeline / context engine behavior
+- continuity and memory behavior
+- hydration/proactivity policy
+- frontend shell/components
+- admin/docs/support/memory/context-meter surfaces
+- visual evidence and screenshots if present
+
+For each inspected target, produce an extraction map rather than a direct copy plan.
+
+## Phase 3 — Clean target module build
+
+Goal: build owned CAOS Core modules in `linode-repo`.
+
+Priority foundation:
+
+- context meter
+- thin state snapshot
+- lane state manager
+- memory ranking and anti-duplication
+- context sanity / transcription anomaly gate
+- receipt service
+- chat orchestrator pre-provider pipeline
+- persistence boundary
+- provider adapters only after context/memory/state/receipt scaffolds are explainable
+
+## Phase 4 — Validation and runtime ownership
+
+Goal: validate clean modules locally, then prepare owned deployment only after the clean architecture is coherent.
+
+Validation requirements:
+
+- backend boot verified from real checkout
+- route receipts verified
+- context meter receipt verified
+- memory/state behavior verified
+- no hidden dependency on hosted-platform runtime
+- no production secrets required for local validation
+- no monolithic hosted-platform deployment masquerading as ownership
+
+Deployment remains a separate approved action.
+
+## Line and file policy
 
 ```text
 Target: <= 200 lines per code file where practical
@@ -193,40 +272,68 @@ Hard cap: 400 lines unless Michael explicitly approves exception
 Docs/contracts/vault files may be longer
 ```
 
-## Repo relationship decision
+No God files.
 
-Initial recommendation:
+If a module approaches the hard cap, stop and map extraction before adding more behavior.
 
-- Do not copy all working source into `linode-repo` immediately.
-- First deploy `emergent-caos-build` directly to `/srv/caosos.com`.
-- Use `linode-repo` to hold migration doctrine, checklists, contracts, and future clean extraction targets.
-- Once the working system is owned and running, decide whether to:
-  - keep `emergent-caos-build` as runtime repo, or
-  - promote/copy working source into `linode-repo`, or
-  - create a new canonical `caosos.com` runtime repo.
+## Source integrity rule
 
-Do not make that repo consolidation decision during the first migration step.
+Verification is binary.
 
-## Why this order
+Do not say a file, repo, behavior, route, screenshot, or feature is verified unless it has actually been inspected, executed, or otherwise source-confirmed for the specific claim.
 
-The working system already exists.
+Allowed labels:
 
-Destroying or rewriting it before server custody creates avoidable risk.
+- verified
+- source-backed
+- user-stated
+- inferred
+- unverified
+- partially inspected
+- pending inspection
+- contradicted
+- superseded
 
-The correct first win is:
+Forbidden framing:
 
 ```text
-CAOS runs from Michael's server instead of Emergent.
+verified enough
+good enough
+probably fine
+assume complete
 ```
 
-Then the system can be measured, cleaned, refactored, and extended under Michael's control.
+There is no "enough" standard for core truth claims. A claim is verified for the stated scope or it is not.
 
 ## Current source confirmation
 
-Michael confirmed the source code repository:
+Michael confirmed the two active GitHub anchors:
 
 ```text
 https://github.com/caosos/emergent-caos-build.git
+https://github.com/caosos/linode-repo.git
 ```
 
-This is the repository to clone for the first CAOS Core ownership migration.
+Correct role assignment:
+
+```text
+emergent-caos-build = working full-stack reference
+linode-repo = clean owned implementation target
+```
+
+## Non-negotiable
+
+This is the third CAOS build generation.
+
+The first two working platforms prove behavior and direction. The Linode build must not inherit avoidable hosted-platform contamination or monolithic structure.
+
+The correct win is:
+
+```text
+clean owned CAOS Core modules
++ explicit orchestrators
++ receipts
++ context/memory/state governance
++ verified behavior parity where required
+= best CAOS build to date
+```
