@@ -16,21 +16,23 @@ current-build/
 
 ## Rules
 
-- Do not place screenshots at repository root.
+- Screenshots and visual captures are behavioral evidence, not decoration.
 - Do not use screenshots as vague inspiration only.
 - Every screenshot should have an origin, date, source branch or PR when available, and what it proves.
 - Base44 screenshots are visual and behavior reference only. Do not use Base44 code.
 - Emergent screenshots are current full-stack visual and behavior reference. Do not copy monoliths.
 - Current-build screenshots are implementation-target and defect-comparison evidence.
 
-## Current cleanup note
+## Current visual evidence note
 
-PR #1, `Emergent visual reference`, added 25 PNG screenshots directly at repository root. Those files are valid visual evidence but are in the wrong location.
+PR #1, `Emergent visual reference`, added 25 PNG screenshots to the repository. Those files are intentional live visual evidence of actual CAOS visuals and behaviors.
 
-Target location for those files:
+Their current placement is authorized evidence placement unless Michael explicitly authorizes a later organizational move.
+
+If the files are later organized into:
 
 ```text
 docs/visual-reference/emergent/
 ```
 
-Until the binary move is completed, treat the root PNG files as misplaced evidence requiring relocation.
+that must be treated as optional organization only. It must not reduce or change their authority as live behavioral evidence.
