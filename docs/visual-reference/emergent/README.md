@@ -2,9 +2,9 @@
 
 ## Purpose
 
-This folder is the intended home for screenshots from the Emergent full-stack CAOS reference build.
+This folder contains screenshots from the Emergent full-stack CAOS reference build.
 
-Emergent visual evidence is used to preserve current working behavior, UI direction, and feature inventory while rebuilding CAOS cleanly in modular owned form.
+Emergent visual evidence is live behavioral evidence. It preserves working behavior, UI direction, product surfaces, and feature inventory while CAOS is rebuilt cleanly in modular owned form.
 
 ## Rules
 
@@ -12,46 +12,39 @@ Emergent visual evidence is used to preserve current working behavior, UI direct
 - Do not deploy the Emergent runtime as the clean CAOS target.
 - Do not copy Emergent monoliths wholesale.
 - Extract behavior contracts and rebuild clean modules.
+- Screenshots are evidence of actual visuals and behaviors, not decoration.
 - Every screenshot should be indexed before it is used for implementation guidance.
 
-## Pending relocation from repository root
+## Evidence files
 
-The following root-level screenshots were added by PR #1 and should be moved into this folder:
-
-```text
-Screenshot from 2026-04-27 01-29-11.png
-Screenshot from 2026-04-27 01-29-18.png
-Screenshot from 2026-04-27 01-29-22.png
-Screenshot from 2026-04-27 01-29-26.png
-Screenshot from 2026-04-27 01-29-30.png
-Screenshot from 2026-04-27 01-29-33.png
-Screenshot from 2026-04-27 01-29-47.png
-Screenshot from 2026-04-27 01-30-15.png
-Screenshot from 2026-04-27 01-30-47.png
-Screenshot from 2026-04-27 01-31-03.png
-Screenshot from 2026-04-27 01-31-13.png
-Screenshot from 2026-04-27 01-31-22.png
-Screenshot from 2026-04-27 01-31-30.png
-Screenshot from 2026-04-27 01-31-40.png
-Screenshot from 2026-04-27 01-31-56.png
-Screenshot from 2026-04-27 01-32-04.png
-Screenshot from 2026-04-27 01-32-20.png
-Screenshot from 2026-04-27 01-32-29.png
-Screenshot from 2026-04-27 01-32-44.png
-Screenshot from 2026-04-27 01-33-02.png
-Screenshot from 2026-04-27 01-33-17.png
-Screenshot from 2026-04-27 01-33-58.png
-Screenshot from 2026-04-27 01-34-03.png
-Screenshot from 2026-04-27 01-34-09.png
-Screenshot from 2026-04-27 01-34-54.png
-```
-
-## Target naming convention
-
-When moved, use stable names:
+The following screenshots are intentional live visual evidence:
 
 ```text
 2026-04-27_01-29-11_emergent_reference.png
+2026-04-27_01-29-18_emergent_reference.png
+2026-04-27_01-29-22_emergent_reference.png
+2026-04-27_01-29-26_emergent_reference.png
+2026-04-27_01-29-30_emergent_reference.png
+2026-04-27_01-29-33_emergent_reference.png
+2026-04-27_01-29-47_emergent_reference.png
+2026-04-27_01-30-15_emergent_reference.png
+2026-04-27_01-30-47_emergent_reference.png
+2026-04-27_01-31-03_emergent_reference.png
+2026-04-27_01-31-13_emergent_reference.png
+2026-04-27_01-31-22_emergent_reference.png
+2026-04-27_01-31-30_emergent_reference.png
+2026-04-27_01-31-40_emergent_reference.png
+2026-04-27_01-31-56_emergent_reference.png
+2026-04-27_01-32-04_emergent_reference.png
+2026-04-27_01-32-20_emergent_reference.png
+2026-04-27_01-32-29_emergent_reference.png
+2026-04-27_01-32-44_emergent_reference.png
+2026-04-27_01-33-02_emergent_reference.png
+2026-04-27_01-33-17_emergent_reference.png
+2026-04-27_01-33-58_emergent_reference.png
+2026-04-27_01-34-03_emergent_reference.png
+2026-04-27_01-34-09_emergent_reference.png
+2026-04-27_01-34-54_emergent_reference.png
 ```
 
-Do not leave raw GNOME screenshot filenames at repository root.
+These files must be treated as canonical live visual evidence for actual CAOS visuals and behaviors unless Michael explicitly supersedes them.
