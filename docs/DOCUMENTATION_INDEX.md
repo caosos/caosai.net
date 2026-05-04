@@ -18,7 +18,8 @@ This index is the starting point for anyone entering the build.
 8. `docs/CROSSWIRE_INTEGRATION_LEDGER.md`
 9. `docs/SOURCE_TO_TARGET_MAP.md`
 10. `docs/BEHAVIOR_SNAPSHOT_FROM_SCREENSHOTS.md`
-11. lane-specific contract docs
+11. `docs/LIVE_PROTOTYPE_VISUAL_OPERATING_MANUAL_2026-05-03.md`
+12. lane-specific contract docs
 
 ## Documentation groups
 
@@ -50,6 +51,7 @@ This index is the starting point for anyone entering the build.
 
 ### Product behavior evidence
 
+- `LIVE_PROTOTYPE_VISUAL_OPERATING_MANUAL_2026-05-03.md` — detailed visual operating manual for the live Base44 and Emergent CAOS prototype systems; identifies proven surfaces, operating implications, and behavioral blanks for Michael to fill.
 - `BEHAVIOR_SNAPSHOT_FROM_SCREENSHOTS.md` — visible product surfaces and behavior evidence from screenshots.
 - `EMERGENT_DOCUMENTATION_LEDGER.md` — source documentation intake and rules.
 - `FRONTEND_VISUAL_BEHAVIOR_CONTRACT.md` — visual/UI behavior contract from Base44 and Emergent references.
