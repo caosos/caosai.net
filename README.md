@@ -2,7 +2,18 @@
 
 **CAOS** is an experimental governed AI orchestration platform focused on persistent memory, tool-connected execution, multi-model inference routing, context hygiene, receipts, and practical workflow automation.
 
-This repository is the public clean-rebuild home for CAOS. It is intended to make the project understandable to humans, AI coding agents, collaborators, and technical reviewers without exposing private product code or sensitive operational details.
+This repository is the public clean-rebuild home for CAOS. It is intended to make the project understandable to humans, AI coding agents, collaborators, and technical reviewers without exposing private CAOSCare implementation details or sensitive operational data.
+
+## Start Here
+
+If you are new to the project, start in this order:
+
+1. [`docs/CAOS_PUBLIC_OVERVIEW.md`](docs/CAOS_PUBLIC_OVERVIEW.md) — plain-English overview.
+2. [`docs/VISUAL_EVIDENCE_MANIFEST.md`](docs/VISUAL_EVIDENCE_MANIFEST.md) — what the working prototype looks like and does.
+3. [`docs/visual-reference/README.md`](docs/visual-reference/README.md) — visual-reference evidence rules.
+4. [`docs/ARCHITECTURE_CONCEPTS.md`](docs/ARCHITECTURE_CONCEPTS.md) — memory bins, hydration, receipts, model routing, worker agents, MCP, sandbox lane.
+5. [`docs/PUBLIC_ROADMAP.md`](docs/PUBLIC_ROADMAP.md) — public rebuild roadmap.
+6. [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to give feedback or build from the project.
 
 ## Current Status
 
@@ -28,6 +39,25 @@ CAOS explores the idea that modern AI systems should not only answer questions. 
 - explicit learning rather than silent mutation;
 - agent workflows that can inspect, plan, execute, validate, and stop cleanly.
 
+## What The Prototype Already Explored
+
+The existing CAOS prototype evidence includes:
+
+- main chat shell;
+- engine/mode controls;
+- memory console;
+- quick capture;
+- admin dashboard/admin docs;
+- support tickets;
+- working context/window meter;
+- previous-thread search;
+- voice/speech settings;
+- role-aware settings;
+- connector/tool surfaces;
+- visual operating references.
+
+See [`docs/VISUAL_EVIDENCE_MANIFEST.md`](docs/VISUAL_EVIDENCE_MANIFEST.md) for the public visual/behavioral summary.
+
 ## Core Concepts
 
 ```text
@@ -49,7 +79,7 @@ CAOSCare is the first major product direction planned around the CAOS architectu
 
 CAOSCare is intended as an assistive response and workflow layer, not an autonomous medical decision-maker.
 
-See [`docs/CAOSCARE_PRODUCT_PREVIEW.md`](docs/CAOSCARE_PRODUCT_PREVIEW.md).
+The public concept is documented in [`docs/CAOSCARE_PRODUCT_PREVIEW.md`](docs/CAOSCARE_PRODUCT_PREVIEW.md). Private CAOSCare implementation code is intentionally not published here.
 
 ## Public Documentation
 
@@ -57,7 +87,10 @@ See [`docs/CAOSCARE_PRODUCT_PREVIEW.md`](docs/CAOSCARE_PRODUCT_PREVIEW.md).
 - [`docs/CAOSCARE_PRODUCT_PREVIEW.md`](docs/CAOSCARE_PRODUCT_PREVIEW.md)
 - [`docs/ARCHITECTURE_CONCEPTS.md`](docs/ARCHITECTURE_CONCEPTS.md)
 - [`docs/PUBLIC_ROADMAP.md`](docs/PUBLIC_ROADMAP.md)
+- [`docs/VISUAL_EVIDENCE_MANIFEST.md`](docs/VISUAL_EVIDENCE_MANIFEST.md)
+- [`docs/visual-reference/README.md`](docs/visual-reference/README.md)
 - [`SECURITY.md`](SECURITY.md)
+- [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
 ## Working Rules
 
@@ -66,6 +99,10 @@ See [`docs/CAOSCARE_PRODUCT_PREVIEW.md`](docs/CAOSCARE_PRODUCT_PREVIEW.md).
 - No secrets, tokens, private resident/staff examples, or facility-specific data.
 - Public claims must distinguish prototype, active rebuild, planned feature, and completed feature.
 - AI agents inspecting this repo should read the public docs before making claims.
+
+## License
+
+This repository is released under the MIT License. See [`LICENSE`](LICENSE).
 
 ## Why This Exists
 
