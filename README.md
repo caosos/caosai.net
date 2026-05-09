@@ -4,6 +4,30 @@
 
 This repository is the public clean-rebuild home for CAOS. It is intended to make the project understandable to humans, AI coding agents, collaborators, and technical reviewers without exposing private CAOSCare implementation details or sensitive operational data.
 
+## Built For User-Owned AI
+
+CAOS is built for privacy, personalization, and user-directed AI experience.
+
+The goal is not a generic chatbot that forgets who you are every session. The goal is an AI workbench that can get to know the user, adapt to the user, and remain governed by the user.
+
+Core product principles:
+
+- **Your memory is yours.** CAOS memory is designed around user-owned context, not hidden data harvesting.
+- **Your AI should know you because you allow it to.** Personalization should be explicit, inspectable, correctable, and removable.
+- **Your experience should be customized to you and by you.** The user should control preferences, memory, models, tools, voice, workflows, and boundaries.
+- **Use the model that fits the job.** CAOS is designed for multi-provider inference and future model routing instead of locking every task to one model.
+- **Context should be governed.** Relevant context should be hydrated when useful, sanitized when needed, and backed by receipts.
+- **Tools need rules.** File, repo, connector, MCP, and agent actions should be permissioned, visible, and auditable.
+
+In short:
+
+```text
+Your memory.
+Your models.
+Your tools.
+Your rules.
+```
+
 ## Start Here
 
 If you are new to the project, start in this order:
@@ -32,6 +56,7 @@ Private product work, including CAOSCare implementation details, remains separat
 CAOS explores the idea that modern AI systems should not only answer questions. They should operate inside a governed workbench with:
 
 - memory that is structured instead of dumped into one long conversation;
+- user-owned personalization;
 - tool access that is visible, permissioned, and receipt-backed;
 - model routing that uses cheaper models for bounded work and stronger models for harder synthesis;
 - context hydration that pulls the right information at the right time;
@@ -110,4 +135,4 @@ The agent-runtime space is moving quickly: coding agents, MCP-connected tools, E
 
 CAOS is an attempt to build a broader governed platform around those same primitives, with practical product use cases beyond coding alone.
 
-Feedback is welcome, especially on architecture, memory design, orchestration, cost-aware inference, safety boundaries, and product direction.
+Feedback is welcome, especially on user-owned memory, privacy-centered personalization, architecture, memory design, orchestration, cost-aware inference, safety boundaries, and product direction.
