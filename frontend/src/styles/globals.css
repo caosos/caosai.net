@@ -1,0 +1,84 @@
+/* CAOS global styles — dark shell, glass surfaces, starfield-visible */
+
+:root {
+  --caos-bg: #06060f;
+  --caos-surface: rgba(15, 12, 30, 0.75);
+  --caos-surface-2: rgba(20, 16, 42, 0.65);
+  --caos-border: rgba(120, 90, 220, 0.18);
+  --caos-accent: #7c5cbf;
+  --caos-accent-bright: #a78bfa;
+  --caos-accent-glow: rgba(124, 92, 191, 0.35);
+  --caos-text: #e8e4f4;
+  --caos-text-dim: rgba(200, 190, 230, 0.55);
+  --caos-text-muted: rgba(160, 150, 200, 0.4);
+  --caos-user-bubble: rgba(90, 60, 160, 0.28);
+  --caos-assistant-bubble: rgba(18, 14, 38, 0.6);
+  --caos-sidebar-width: 260px;
+  --caos-header-height: 52px;
+  --caos-composer-height: 72px;
+  --caos-radius: 12px;
+  --caos-radius-sm: 8px;
+  --caos-transition: 180ms ease;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  color: var(--caos-text);
+  background: var(--caos-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+}
+
+input, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(120, 90, 220, 0.3);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 90, 220, 0.5);
+}
+
+.glass {
+  background: var(--caos-surface);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid var(--caos-border);
+}
+
+.glass-2 {
+  background: var(--caos-surface-2);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border: 1px solid var(--caos-border);
+}
+
+.accent-glow {
+  box-shadow: 0 0 20px var(--caos-accent-glow);
+}
