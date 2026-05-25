@@ -9,8 +9,9 @@ import { SidebarView } from './types';
 import { useChat } from './hooks/useChat';
 import { useModels } from './hooks/useModels';
 
+const SIDEBAR_WIDTH = 200;
+
 export default function App() {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeView, setActiveView] = useState<SidebarView>('threads');
 
   const { threads, activeThread, activeThreadId, loading, newThread, selectThread, sendMessage } =
@@ -28,61 +29,46 @@ export default function App() {
     0
   );
 
-  const mainLeft = sidebarOpen ? 'var(--caos-sidebar-width)' : '0';
-
   return (
     <div style={{ height: '100vh', width: '100vw', position: 'relative', overflow: 'hidden' }}>
       <Starfield />
 
       <Sidebar
-        open={sidebarOpen}
         activeView={activeView}
         onViewChange={setActiveView}
-        onClose={() => setSidebarOpen(false)}
         threads={threads}
         activeThreadId={activeThreadId}
-        onSelectThread={(id) => {
-          selectThread(id);
-          setActiveView('threads');
-        }}
-        onNewThread={() => {
-          newThread();
-          setActiveView('threads');
-        }}
+        onSelectThread={selectThread}
+        onNewThread={newThread}
       />
 
-      <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: mainLeft,
-          right: 0,
-          bottom: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          transition: 'left var(--caos-transition)',
-          zIndex: 10,
-        }}
-      >
+      {/* Main content area — offset by sidebar width */}
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: SIDEBAR_WIDTH,
+        right: 0,
+        bottom: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        zIndex: 10,
+      }}>
         <Header
           threadTitle={activeThread?.title}
           activeModel={activeModel}
           tokensUsed={estimatedTokens}
-          sidebarOpen={sidebarOpen}
-          onToggleSidebar={() => setSidebarOpen(true)}
-          activeView={activeView}
+          onNewThread={newThread}
         />
 
-        <div
-          style={{
-            flex: 1,
-            paddingTop: 'var(--caos-header-height)',
-            paddingBottom: 'calc(var(--caos-composer-height) + 32px)',
-            overflow: 'hidden',
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
+        {/* Chat area */}
+        <div style={{
+          flex: 1,
+          paddingTop: 48,
+          paddingBottom: 90,
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
+        }}>
           <ChatPane messages={messages} loading={loading} onPrompt={handleSend} />
         </div>
 
@@ -92,6 +78,7 @@ export default function App() {
           activeModel={activeModel}
           availableModels={availableModels}
           onSelectModel={selectModel}
+          tokensUsed={estimatedTokens}
         />
       </div>
     </div>
