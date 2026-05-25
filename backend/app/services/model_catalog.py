@@ -1,9 +1,4 @@
-"""Model catalog and WCW metadata.
-
-Values here are configurable product defaults. They should be verified against
-provider documentation before production release and can later move to DB/admin
-configuration.
-"""
+"""Model catalog and WCW metadata."""
 
 from __future__ import annotations
 
@@ -13,16 +8,6 @@ from app.schemas.models import ModelContextSpec
 class ModelCatalog:
     def __init__(self) -> None:
         self._models: list[ModelContextSpec] = [
-            ModelContextSpec(
-                provider="openai",
-                model="gpt-4o",
-                display_name="GPT-4o",
-                context_window_tokens=128_000,
-                usable_context_tokens=112_000,
-                reserved_output_tokens=8_000,
-                reserved_system_tokens=8_000,
-                wcw_policy="reserve_output_and_system_v1",
-            ),
             ModelContextSpec(
                 provider="anthropic",
                 model="claude-sonnet-4-6",
@@ -40,6 +25,16 @@ class ModelCatalog:
                 context_window_tokens=200_000,
                 usable_context_tokens=180_000,
                 reserved_output_tokens=12_000,
+                reserved_system_tokens=8_000,
+                wcw_policy="reserve_output_and_system_v1",
+            ),
+            ModelContextSpec(
+                provider="openai",
+                model="gpt-4o",
+                display_name="GPT-4o",
+                context_window_tokens=128_000,
+                usable_context_tokens=112_000,
+                reserved_output_tokens=8_000,
                 reserved_system_tokens=8_000,
                 wcw_policy="reserve_output_and_system_v1",
             ),
