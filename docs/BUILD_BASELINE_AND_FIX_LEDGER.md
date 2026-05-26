@@ -28,6 +28,21 @@ CAOS is a receipt-driven system. **Receipts must not lie.** Any code that return
 | Frontend — Thread loading | Loads from server on mount and on thread select |
 | Memory | Scaffolded, not production-complete |
 | TTS/STT | Not implemented in this rebuild |
+
+### Deploy Chain (as of 2026-05-26)
+
+| Component | Path |
+|---|---|
+| Source of truth | `/home/michael-chambers/caosai.net/` (GitHub: `caosos/caosai.net`) |
+| Runtime host | `/home/michael-chambers/linode-repo/backend/` (GitHub: `caosos/linode-repo`) |
+| Active deploy script | `~/deploy.sh` (server, untracked) |
+| Tracked deploy script | `ops/deploy.sh` (this repo, tracked) |
+| Runtime doc | `docs/RUNTIME_SOURCE_OF_TRUTH.md` |
+| Frontend webroot | `/var/www/caosai.net/` |
+| Backend service | `caos-backend` systemd unit |
+| Secrets file | `/home/michael-chambers/linode-repo/backend/.env` (not tracked) |
+
+See `docs/RUNTIME_SOURCE_OF_TRUTH.md` for the full chain map.
 | Attachments | Not implemented in this rebuild |
 
 ---
