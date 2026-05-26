@@ -13,8 +13,8 @@ litellm.drop_params = True
 
 PROVIDER_MODEL_MAP = {
     ("openai", "gpt-4o"): "openai/gpt-4o",
-    ("openai", "gpt-4.5"): "openai/gpt-4.5",
-    ("openai", "gpt-4.5-turbo"): "openai/gpt-4.5-turbo",
+    ("openai", "gpt-4.5"): "openai/gpt-4.5-preview",
+    ("openai", "gpt-5.5"): "openai/gpt-5.5",
     ("anthropic", "claude-sonnet-4-6"): "anthropic/claude-sonnet-4-6",
     ("anthropic", "claude-opus-4-7"): "anthropic/claude-opus-4-7",
     ("google", "gemini-2.0-flash"): "gemini/gemini-2.0-flash",
