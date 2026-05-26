@@ -39,6 +39,16 @@ class ModelCatalog:
                 wcw_policy="reserve_output_and_system_v1",
             ),
             ModelContextSpec(
+                provider="openai",
+                model="gpt-4.5",
+                display_name="GPT-4.5",
+                context_window_tokens=128_000,
+                usable_context_tokens=112_000,
+                reserved_output_tokens=8_000,
+                reserved_system_tokens=8_000,
+                wcw_policy="reserve_output_and_system_v1",
+            ),
+            ModelContextSpec(
                 provider="google",
                 model="gemini-2.0-flash",
                 display_name="Gemini 2.0 Flash",
