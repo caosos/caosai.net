@@ -4,15 +4,20 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 
+import pymongo
+
 from app.core.config import load_settings
-from app.core.database import DatabaseHandle
 from app.schemas.threads import MessageRecord, ThreadRecord, ThreadListRequest, ThreadCreateRequest
+
+_mongo_client: pymongo.MongoClient | None = None
 
 
 def _db():
+    global _mongo_client
     settings = load_settings()
-    handle = DatabaseHandle(settings)
-    return handle.client[settings.mongo_db_name]
+    if _mongo_client is None:
+        _mongo_client = pymongo.MongoClient(settings.mongo_uri)
+    return _mongo_client[settings.mongo_db_name]
 
 
 class ThreadService:
