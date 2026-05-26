@@ -49,6 +49,14 @@ export interface MemoryAtom {
 export interface ChatMessage {
   role: 'user' | 'assistant' | 'system' | 'tool';
   content: string;
+  latency_ms?: number;
+}
+
+export interface ChatReceipt {
+  userTokens: number;
+  assistantTokens: number;
+  threadTotalTokens: number;
+  latencyMs: number;
 }
 
 export interface Thread {
