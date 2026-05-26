@@ -8,6 +8,7 @@ interface ComposerProps {
   availableModels?: ModelContextSpec[];
   onSelectModel?: (provider: string, model: string) => void;
   tokensUsed?: number;
+  lastLatencyMs?: number;
 }
 
 export default function Composer({
@@ -17,6 +18,7 @@ export default function Composer({
   availableModels = [],
   onSelectModel,
   tokensUsed = 0,
+  lastLatencyMs,
 }: ComposerProps) {
   const [text, setText] = useState('');
   const [showModels, setShowModels] = useState(false);
@@ -190,6 +192,17 @@ export default function Composer({
         }}>
           Full Aria
         </button>
+
+        {lastLatencyMs && (
+          <span style={{
+            marginLeft: 'auto',
+            fontSize: 10,
+            color: 'var(--caos-text-muted)',
+            letterSpacing: '0.02em',
+          }}>
+            {lastLatencyMs < 1000 ? `${lastLatencyMs}ms` : `${(lastLatencyMs / 1000).toFixed(1)}s`}
+          </span>
+        )}
       </div>
     </div>
   );

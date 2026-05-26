@@ -11,6 +11,7 @@ from app.api.health import router as health_router
 from app.api.memory import router as memory_router
 from app.api.models import router as models_router
 from app.api.runtime import router as runtime_router
+from app.api.threads import router as threads_router
 from app.core.config import load_settings
 from app.core.logging import configure_logging
 
@@ -32,6 +33,7 @@ def create_app() -> FastAPI:
     app.include_router(admin_router, prefix="/api")
     app.include_router(memory_router, prefix="/api")
     app.include_router(models_router, prefix="/api")
+    app.include_router(threads_router, prefix="/api")
 
     return app
 
