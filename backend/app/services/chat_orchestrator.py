@@ -12,9 +12,9 @@ from app.schemas.chat import ChatMessage, ChatRequest, ChatResponse
 litellm.drop_params = True
 
 PROVIDER_MODEL_MAP = {
-    ("openai", "gpt-4o"): "gpt-4o",
-    ("anthropic", "claude-sonnet-4-6"): "claude-sonnet-4-6",
-    ("anthropic", "claude-opus-4-7"): "claude-opus-4-7",
+    ("openai", "gpt-4o"): "openai/gpt-4o",
+    ("anthropic", "claude-sonnet-4-6"): "anthropic/claude-sonnet-4-6",
+    ("anthropic", "claude-opus-4-7"): "anthropic/claude-opus-4-7",
     ("google", "gemini-2.0-flash"): "gemini/gemini-2.0-flash",
     ("xai", "grok-3"): "xai/grok-3",
 }
