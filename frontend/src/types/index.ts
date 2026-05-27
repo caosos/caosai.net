@@ -96,4 +96,44 @@ export interface RuntimeState {
   database: Record<string, unknown>;
 }
 
-export type SidebarView = 'threads' | 'memory' | 'settings' | 'admin' | 'artifacts';
+export type SidebarView = 'threads' | 'memory' | 'settings' | 'admin' | 'artifacts' | 'agent_playground';
+
+export type AgentJobStatus = 'pending' | 'planned' | 'blocked' | 'completed' | 'failed';
+
+export interface AgentToolScope {
+  allowed_tools: string[];
+  forbidden_tools: string[];
+}
+
+export interface AgentLimits {
+  max_runtime_seconds: number;
+  max_tool_calls: number;
+  max_tokens: number;
+  max_spawned_agents: number;
+}
+
+export interface AgentJobPacket {
+  job_id: string;
+  project_id: string;
+  agent_role: string;
+  task_summary: string;
+  read_scope: string[];
+  write_scope: string[];
+  network_scope: string[];
+  connector_scope: string[];
+  memory_bins_available: string[];
+  secret_access_allowed: boolean;
+  tools: AgentToolScope;
+  limits: AgentLimits;
+  approval_required_for: string[];
+  stop_conditions: string[];
+  status: AgentJobStatus;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface AgentJobResponse {
+  job?: AgentJobPacket | null;
+  jobs?: AgentJobPacket[];
+  receipt: Record<string, unknown>;
+}

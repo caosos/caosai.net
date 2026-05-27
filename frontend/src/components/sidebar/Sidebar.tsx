@@ -18,7 +18,7 @@ const NAV_ITEMS: { id: SidebarView | string; label: string; icon: string; view?:
   { id: 'settings', label: 'Settings', icon: '⚙️', view: 'settings' },
   { id: 'divider1', label: '', icon: '' },
   { id: 'search', label: 'Quick Capture', icon: '⚡' },
-  { id: 'agent-search', label: 'Agent Search', icon: '🤖' },
+  { id: 'agent-playground', label: 'Agent Playground', icon: '🤖', view: 'agent_playground' },
   { id: 'divider2', label: '', icon: '' },
   { id: 'admin', label: 'Admin Dashboard', icon: '🛡️', view: 'admin' },
   { id: 'admin-docs', label: 'Admin Docs', icon: '📋' },
