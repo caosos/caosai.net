@@ -39,6 +39,7 @@ This index is the starting point for anyone entering the build.
 - `PORTABILITY_MATRIX.md` — portable Ubuntu/Linode runtime assumptions.
 - `SALVAGE_POLICY.md` — when old code can/cannot be reused.
 - `AGENTIC_PLATFORM_REQUIREMENT.md` — agentic work mode and native capability doctrine.
+- `AGENT_PLAYGROUND_AND_HERMES_EVALUATION_CONTRACT.md` — bounded agent playground, Hermes-like substrate evaluation, sandbox, security, Codex bridge, and tool-economy doctrine.
 - `LOCAL_MODEL_HOSTING_AND_COST_STRATEGY.md` — cloud/local model hosting, cost, latency, and routing strategy.
 
 ### Agent and integration governance
@@ -63,6 +64,7 @@ This index is the starting point for anyone entering the build.
 - `MEMORY_ARC_HYDRATION_CONTRACT.md` — WCW/ARC/memory/hydration/sanitization doctrine.
 - `WCW_ENGINE_CONTEXT_CONTRACT.md` — model-specific working context requirements.
 - `RECEIPT_EVERYWHERE_CONTRACT.md` — receipt requirements for every meaningful action.
+- `AGENT_PLAYGROUND_AND_HERMES_EVALUATION_CONTRACT.md` — agent playground, sandbox contracts, visible tool-call/token accounting, Hermes-like evaluation boundaries, and Codex bridge direction.
 - `FUTURE_MACHINE_INTERFACE_VISION.md` — future PLC/HMI/machine guidance vision.
 
 ### Public launch, discoverability, and trust
