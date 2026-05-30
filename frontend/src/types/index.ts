@@ -52,11 +52,30 @@ export interface ChatMessage {
   latency_ms?: number;
 }
 
+export interface TurnLedger {
+  turn_id: string;
+  model_calls: number;
+  tool_calls: number;
+  retries: number;
+  elapsed_ms: number;
+  memory_read: boolean;
+  memory_written: boolean;
+  memory_state: string;
+  hydration_size_tokens: number;
+  input_tokens: number;
+  output_tokens: number;
+  total_tokens: number;
+  failure_state: string;
+  mode_decision: string;
+  estimated_cost_usd: number | null;
+}
+
 export interface ChatReceipt {
   userTokens: number;
   assistantTokens: number;
   threadTotalTokens: number;
   latencyMs: number;
+  turnLedger?: TurnLedger;
 }
 
 export interface Thread {

@@ -52,6 +52,28 @@ export default function Header({ threadTitle, activeModel, tokensUsed, onNewThre
           <span><span style={{ opacity: 0.7 }}>RECV</span> <span style={{ color: 'var(--caos-text-dim)' }}>{receipt.assistantTokens}</span></span>
           <span><span style={{ opacity: 0.7 }}>THREAD</span> <span style={{ color: 'var(--caos-text-dim)' }}>{receipt.threadTotalTokens}</span></span>
           <span><span style={{ opacity: 0.7 }}>LAT</span> <span style={{ color: 'var(--caos-text-dim)' }}>{formatLat(receipt.latencyMs)}</span></span>
+          {receipt.turnLedger && (
+            <span
+              data-testid="discipline-chip"
+              title={`turn ${receipt.turnLedger.turn_id} · failure_state: ${receipt.turnLedger.failure_state} · mode: ${receipt.turnLedger.mode_decision}`}
+              style={{
+                marginLeft: 4,
+                padding: '1px 6px',
+                borderRadius: 8,
+                border: '1px solid var(--caos-border)',
+                background: receipt.turnLedger.failure_state === 'ok'
+                  ? 'rgba(255,255,255,0.03)'
+                  : 'rgba(255, 120, 120, 0.08)',
+                color: receipt.turnLedger.failure_state === 'ok'
+                  ? 'var(--caos-text-dim)'
+                  : 'var(--caos-accent-bright, #ff9a9a)',
+                letterSpacing: '0.04em',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {receipt.turnLedger.model_calls} LLM · {receipt.turnLedger.tool_calls} tools · {receipt.turnLedger.retries} retries · {receipt.turnLedger.memory_state}
+            </span>
+          )}
         </div>
       )}
 

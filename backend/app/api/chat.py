@@ -44,14 +44,23 @@ def chat_turn(request: ChatRequest) -> ApiEnvelope:
             "tools_executed": orch_receipt.get("tools_executed", False),
             "persistence_written": provider_called,
             "error": orch_receipt.get("error"),
+            "turn_ledger": orch_receipt.get("turn_ledger"),
         },
         changes=[],
         model_ref={"provider": response.provider, "model": response.model},
     )
 
+    response_data = response.model_dump()
+    # Surface the turn_ledger at the top level of the response so the
+    # frontend can render the discipline chip without digging into the
+    # action_receipt's nested outputs.
+    if "turn_ledger" in orch_receipt:
+        response_data["turn_ledger"] = orch_receipt["turn_ledger"]
+    response_data["receipt"] = receipt.model_dump()
+
     return ApiEnvelope(
         ok=True,
-        data={**response.model_dump(), "receipt": receipt.model_dump()},
+        data=response_data,
         diagnostic_receipt=chat_receipt(
             f"Chat turn handled by orchestrator. Phase: {phase}. Provider called: {provider_called}."
         ),
