@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import { ChatMessage, Thread } from '../types';
+import { ChatMessage, ChatReceipt, Thread } from '../types';
 import { api } from '../api/client';
 
 const USER_ID = 'dev_user';
@@ -21,6 +21,7 @@ export function useChat() {
   const [loading, setLoading] = useState(false);
   const [lastLatencyMs, setLastLatencyMs] = useState<number | undefined>();
   const [totalTokens, setTotalTokens] = useState(0);
+  const [lastReceipt, setLastReceipt] = useState<ChatReceipt | undefined>();
 
   // Load threads from server on mount
   useEffect(() => {
@@ -70,6 +71,7 @@ export function useChat() {
     setActiveThreadId(id);
     setTotalTokens(0);
     setLastLatencyMs(undefined);
+    setLastReceipt(undefined);
   }, []);
 
   const sendMessage = useCallback(
@@ -116,6 +118,13 @@ export function useChat() {
 
         if (latency) setLastLatencyMs(latency);
         if (threadTokens) setTotalTokens(threadTokens);
+
+        setLastReceipt({
+          userTokens: receipt.user_tokens ?? 0,
+          assistantTokens: receipt.assistant_tokens ?? 0,
+          threadTotalTokens: receipt.thread_total_tokens ?? 0,
+          latencyMs: receipt.latency_ms ?? 0,
+        });
 
         // Update thread title from server if it was just generated
         const serverThreadId = data?.thread_id;
@@ -180,6 +189,7 @@ export function useChat() {
     loading,
     lastLatencyMs,
     totalTokens,
+    lastReceipt,
     newThread,
     selectThread,
     sendMessage,
