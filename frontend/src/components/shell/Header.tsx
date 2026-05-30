@@ -1,14 +1,21 @@
 import React from 'react';
-import { ModelContextSpec } from '../../types';
+import { ChatReceipt, ModelContextSpec } from '../../types';
 
 interface HeaderProps {
   threadTitle?: string;
   activeModel?: ModelContextSpec;
   tokensUsed: number;
   onNewThread: () => void;
+  receipt?: ChatReceipt;
 }
 
-export default function Header({ threadTitle, activeModel, tokensUsed, onNewThread }: HeaderProps) {
+function formatLat(ms: number): string {
+  if (!ms) return '—';
+  if (ms < 1000) return `${Math.round(ms)}ms`;
+  return `${(ms / 1000).toFixed(1)}s`;
+}
+
+export default function Header({ threadTitle, activeModel, tokensUsed, onNewThread, receipt }: HeaderProps) {
   const now = new Date();
   const dateStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
@@ -27,6 +34,27 @@ export default function Header({ threadTitle, activeModel, tokensUsed, onNewThre
       backdropFilter: 'blur(20px)',
       borderBottom: '1px solid var(--caos-border)',
     }}>
+      {/* Left — WCW strip (only after first chat turn) */}
+      {receipt && (
+        <div
+          data-testid="wcw-strip"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 12,
+            fontSize: 10,
+            color: 'var(--caos-text-muted)',
+            letterSpacing: '0.06em',
+            textTransform: 'uppercase',
+          }}
+        >
+          <span><span style={{ opacity: 0.7 }}>SENT</span> <span style={{ color: 'var(--caos-text-dim)' }}>{receipt.userTokens}</span></span>
+          <span><span style={{ opacity: 0.7 }}>RECV</span> <span style={{ color: 'var(--caos-text-dim)' }}>{receipt.assistantTokens}</span></span>
+          <span><span style={{ opacity: 0.7 }}>THREAD</span> <span style={{ color: 'var(--caos-text-dim)' }}>{receipt.threadTotalTokens}</span></span>
+          <span><span style={{ opacity: 0.7 }}>LAT</span> <span style={{ color: 'var(--caos-text-dim)' }}>{formatLat(receipt.latencyMs)}</span></span>
+        </div>
+      )}
+
       {/* Center — CAOS brand */}
       <div style={{
         position: 'absolute',

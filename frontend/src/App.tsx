@@ -15,7 +15,7 @@ const SIDEBAR_WIDTH = 200;
 export default function App() {
   const [activeView, setActiveView] = useState<SidebarView>('threads');
 
-  const { threads, activeThread, activeThreadId, loading, lastLatencyMs, totalTokens, newThread, selectThread, sendMessage } =
+  const { threads, activeThread, activeThreadId, loading, lastLatencyMs, totalTokens, lastReceipt, newThread, selectThread, sendMessage } =
     useChat();
   const { availableModels, activeModel, selectModel } = useModels();
 
@@ -59,6 +59,7 @@ export default function App() {
           activeModel={activeModel}
           tokensUsed={displayTokens}
           onNewThread={newThread}
+          receipt={lastReceipt}
         />
 
         {activeView === 'agent_playground' ? (

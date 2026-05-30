@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ChatMessage } from '../../types';
 import MarkdownRenderer from './MarkdownRenderer';
 
@@ -6,8 +6,15 @@ interface MessageBubbleProps {
   message: ChatMessage;
 }
 
+function formatLatency(ms: number): string {
+  if (ms < 1000) return `${Math.round(ms)}ms`;
+  return `${(ms / 1000).toFixed(1)}s`;
+}
+
 export default function MessageBubble({ message }: MessageBubbleProps) {
   const isUser = message.role === 'user';
+  const [copied, setCopied] = useState(false);
+  const [useful, setUseful] = useState(false);
 
   const bubbleContent = isUser ? (
     <span style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
@@ -15,6 +22,39 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
     </span>
   ) : (
     <MarkdownRenderer content={message.content} />
+  );
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(message.content);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // clipboard blocked — silent fail, no fake success
+    }
+  };
+
+  const actionBase: React.CSSProperties = {
+    background: 'none',
+    border: 'none',
+    padding: 0,
+    fontSize: 11,
+    fontFamily: 'inherit',
+    letterSpacing: '0.02em',
+  };
+  const activeStyle: React.CSSProperties = {
+    ...actionBase,
+    color: 'var(--caos-text-dim)',
+    cursor: 'pointer',
+  };
+  const stubStyle: React.CSSProperties = {
+    ...actionBase,
+    color: 'var(--caos-text-muted)',
+    opacity: 0.5,
+    cursor: 'default',
+  };
+  const separator = (
+    <span style={{ color: 'var(--caos-text-muted)', fontSize: 11, opacity: 0.6 }}>·</span>
   );
 
   return (
@@ -59,12 +99,48 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
             display: 'flex',
             alignItems: 'center',
             gap: 8,
-            marginTop: 4,
+            marginTop: 6,
             paddingLeft: 2,
-            minHeight: 0,
+            flexWrap: 'wrap',
           }}
         >
-          {/* M2 latency chip + M3 action buttons will populate here */}
+          {typeof message.latency_ms === 'number' && message.latency_ms > 0 && (
+            <span
+              title="Time to first response"
+              style={{
+                fontSize: 10,
+                color: 'var(--caos-text-muted)',
+                padding: '2px 7px',
+                borderRadius: 10,
+                border: '1px solid var(--caos-border)',
+                background: 'rgba(255,255,255,0.03)',
+                letterSpacing: '0.04em',
+              }}
+            >
+              {formatLatency(message.latency_ms)}
+            </span>
+          )}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <button onClick={handleCopy} style={activeStyle} title="Copy message">
+              {copied ? 'Copied!' : 'Copy'}
+            </button>
+            {separator}
+            <button style={stubStyle} title="Re-read aloud (coming soon)">Re-Read</button>
+            {separator}
+            <button style={stubStyle} title="Send via email (coming soon)">Mail</button>
+            {separator}
+            <button style={stubStyle} title="Reply with context (coming soon)">Reply</button>
+            {separator}
+            <button
+              onClick={() => setUseful((v) => !v)}
+              style={{ ...activeStyle, color: useful ? 'var(--caos-accent-bright, #b8a4ff)' : 'var(--caos-text-dim)' }}
+              title="Mark useful"
+            >
+              {useful ? '✓ Useful' : 'Useful'}
+            </button>
+            {separator}
+            <button style={stubStyle} title="Show reasoning (coming soon)">Why?</button>
+          </div>
         </div>
       )}
     </div>

@@ -129,7 +129,11 @@ export function useChat() {
         // Update thread title from server if it was just generated
         const serverThreadId = data?.thread_id;
 
-        const assistantMsg: ChatMessage = { role: 'assistant', content };
+        const assistantMsg: ChatMessage = {
+          role: 'assistant',
+          content,
+          latency_ms: latency,
+        };
         setThreads((prev) =>
           prev.map((t) => {
             if (t.thread_id !== threadId && t.thread_id !== serverThreadId) return t;
