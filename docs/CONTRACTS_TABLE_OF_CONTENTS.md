@@ -62,6 +62,8 @@ Read in this order when entering the project:
 | `docs/RECEIPT_EVERYWHERE_CONTRACT.md` | Requires receipts for every meaningful system action. |
 | `docs/LOCAL_MODEL_HOSTING_AND_COST_STRATEGY.md` | Defines cloud/local model hosting, cost, latency, and routing strategy. |
 | `docs/AGENTIC_PLATFORM_REQUIREMENT.md` | Defines authorized agentic work mode and provider-native capability doctrine. |
+| `docs/AGENT_PLAYGROUND_AND_HERMES_EVALUATION_CONTRACT.md` | Defines bounded agent playground work, Hermes-like runtime evaluation, sandbox contracts, security risks, tool economy, and Codex bridge direction. |
+| `docs/HERMES_AGENT_INTEGRATION_EVALUATION.md` | Evaluates Hermes Agent as a governed CAOS runtime candidate and defines the phased adapter boundary and risk controls. |
 
 ## Chapter 5 — Aria Behavior and Intelligence
 

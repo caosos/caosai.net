@@ -10,18 +10,42 @@ This repository is the clean rebuild surface for CAOS. The current working branc
 aria-emergent-clean-rebuild
 ```
 
-The source/reference repos and branches are:
+## Latest session handoff — Claude Code terminal interruption and control reset
 
-```text
-Emergent behavior reference:
-caosos/emergent-caos-build
+A recent Claude Code terminal session progressed useful CAOS rebuild work, then timed out/interrupted. After the timeout, Michael started/continued Claude Code from different contexts, including a laptop session and a server-side terminal session. The agent then asked where to start and what had been worked on, creating continuity friction.
 
-Legacy Python salvage reference:
-caosos/linode-repo branch legacy-python-server-salvage-2026-05-01
+Michael's current operating decision:
 
-Clean destination branch:
-caosos/linode-repo branch aria-emergent-clean-rebuild
-```
+- Do not let terminal Claude Code continue broad autonomous work without passing intent, scope, and results through Aria/ChatGPT or another verifier/orchestrator.
+- Michael uses voice heavily and cannot reliably communicate rich context, screenshots, or long pasted instructions into the terminal Claude Code session.
+- Copy/paste into the terminal Claude Code session became unreliable/frustrating, so terminal-only interaction is not an acceptable primary planning interface.
+- Aria/ChatGPT remains the voice-friendly orchestration layer: Michael speaks here; Aria converts intent into bounded agent work orders; Claude Code executes inside approved lanes; results return here for review, correction, and next-task framing.
+- Claude Code autonomy is still desired, but only inside approved work packages with documented scope, receipts, validation, and stop gates.
+
+Recent completed/reported work to preserve:
+
+- FIX-001 repaired receipt truth in `backend/app/api/chat.py`: route receipts now read orchestrator `response.receipt` values rather than hardcoding false/stub behavior.
+- FIX-002 repaired the deploy/runtime source mismatch: `deploy.sh` now pulls from `caosai.net` and rsyncs backend Python to the runtime path while preserving `.venv` and `.env`.
+- FIX-003 repaired thread persistence DB access in `backend/app/services/thread_service.py` using a sync-safe `pymongo.MongoClient` singleton.
+- `docs/BUILD_BASELINE_AND_FIX_LEDGER.md` was created/updated to document baseline, incidents, fixes, blast radius, rollback, and validation.
+- `ops/deploy.sh` was added as a tracked copy of the active deploy script.
+- `docs/RUNTIME_SOURCE_OF_TRUTH.md` was added to document source repo, runtime path, systemd/runtime behavior, deploy chain, preserved secrets, validation, and known risks.
+- `docs/REFERENCE_SOURCE_MAP.md` was added to document required reference sources and visual/product behavior evidence.
+- Live `/api/chat/turn` receipt validation passed after repair: provider called true, persistence written true, error null, diagnostic no longer falsely claims stub/no-provider behavior.
+
+Recent reference-source findings:
+
+- `caosos/emergent-caos-build` was inspected as the current working product/behavior reference.
+- Visual evidence docs and screenshot manifests were inspected, including `VISUAL_EVIDENCE_MANIFEST.md`, `BEHAVIOR_SNAPSHOT_FROM_SCREENSHOTS.md`, `FRONTEND_VISUAL_BEHAVIOR_CONTRACT.md`, and `LIVE_PROTOTYPE_VISUAL_OPERATING_MANUAL_2026-05-03.md`.
+- Emergent behavior sources identified include `voice_service.py`, `useVoiceIO.js`, `MarkdownMessage.js`, and `WorkingContextStrip.js`.
+- `caosos/caos-os-A1` initially returned 404 because it was private/inaccessible to Claude. Michael later fixed access. A future agent should re-run `caos-os-A1` reference inspection before frontend/voice/attachment/memory behavior work.
+- Base44 live reference URL recorded by Michael: `https://caos-chat-9c5683d8.base44.app/Chat`.
+
+Immediate continuity rule:
+
+Before starting a new terminal Claude Code session, read this file, then read `docs/RUNTIME_SOURCE_OF_TRUTH.md`, `docs/BUILD_BASELINE_AND_FIX_LEDGER.md`, and `docs/REFERENCE_SOURCE_MAP.md`. If your local/session memory disagrees with these files, trust the files and report the conflict.
+
+Do not ask Michael to reconstruct the session from memory. Use the documented ledger/source maps first.
 
 ## Prime directive
 
@@ -352,3 +376,5 @@ Stop and report if:
 - source evidence contradicts a contract
 - a secret or credential appears
 - a production deploy/main merge/destructive action is requested without explicit approval
+- terminal Claude Code continuity becomes confused after a timeout/interruption and cannot reconstruct current state from repo docs
+- Michael cannot communicate required context through terminal copy/paste; route scope-setting back through Aria/ChatGPT or another verifier/orchestrator

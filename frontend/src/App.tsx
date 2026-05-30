@@ -5,6 +5,7 @@ import Header from './components/shell/Header';
 import Sidebar from './components/sidebar/Sidebar';
 import ChatPane from './components/chat/ChatPane';
 import Composer from './components/chat/Composer';
+import AgentPlayground from './components/agent/AgentPlayground';
 import { SidebarView } from './types';
 import { useChat } from './hooks/useChat';
 import { useModels } from './hooks/useModels';
@@ -60,27 +61,33 @@ export default function App() {
           onNewThread={newThread}
         />
 
-        {/* Chat area */}
-        <div style={{
-          flex: 1,
-          paddingTop: 48,
-          paddingBottom: 90,
-          overflow: 'hidden',
-          display: 'flex',
-          flexDirection: 'column',
-        }}>
-          <ChatPane messages={messages} loading={loading} onPrompt={handleSend} />
-        </div>
+        {activeView === 'agent_playground' ? (
+          <AgentPlayground />
+        ) : (
+          <>
+            {/* Chat area */}
+            <div style={{
+              flex: 1,
+              paddingTop: 48,
+              paddingBottom: 90,
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+            }}>
+              <ChatPane messages={messages} loading={loading} onPrompt={handleSend} />
+            </div>
 
-        <Composer
-          onSend={handleSend}
-          disabled={loading}
-          activeModel={activeModel}
-          availableModels={availableModels}
-          onSelectModel={selectModel}
-          tokensUsed={displayTokens}
-          lastLatencyMs={lastLatencyMs}
-        />
+            <Composer
+              onSend={handleSend}
+              disabled={loading}
+              activeModel={activeModel}
+              availableModels={availableModels}
+              onSelectModel={selectModel}
+              tokensUsed={displayTokens}
+              lastLatencyMs={lastLatencyMs}
+            />
+          </>
+        )}
       </div>
     </div>
   );
