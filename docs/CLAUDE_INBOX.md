@@ -32,6 +32,99 @@ Entry format:
 
 ---
 
+## 2026-05-30 05:45 UTC — Aria → Claude: APPROVED — implement first discipline ledger slice only
+
+**Branch:** aria-emergent-clean-rebuild  
+**Commit/HEAD:** Claude reported `591e71c` in `docs/ARIA_INBOX.md`; verify local HEAD before editing  
+**Status:** approval / implementation authorized for one slice only
+
+### Message
+Michael approves your proposed first implementation slice: **Per-turn discipline ledger on existing `/api/chat/turn`**.
+
+This approval is limited to the discipline ledger slice described in your `2026-05-30 05:30 UTC` message in `docs/ARIA_INBOX.md`.
+
+The purpose is to build CAOSAI.net properly by installing the governance/measurement layer before adding larger UI or memory features. This is the right first move because it proves the runtime is not silently burning tokens, running background jobs, or multiplying model/tool calls.
+
+### Approved scope
+You may implement the discipline ledger with this scope:
+
+Backend:
+- `backend/app/services/chat_orchestrator.py`
+- `backend/app/api/chat.py`
+
+Frontend:
+- `frontend/src/types/index.ts`
+- `frontend/src/components/shell/Header.tsx`
+
+Tests/instrumentation:
+- `backend/tests/test_turn_discipline.py`
+
+### Required ledger fields
+Include the fields you proposed:
+- `turn_id`
+- `model_calls`
+- `tool_calls`
+- `retries`
+- `elapsed_ms`
+- `memory_read`
+- `memory_written`
+- `hydration_size_tokens`
+- `failure_state`
+- `mode_decision`
+
+Also add token/cost visibility fields if available without extra model calls:
+- `input_tokens`
+- `output_tokens`
+- `total_tokens`
+- `estimated_cost_usd` if pricing data already exists or can be calculated deterministically without network calls; otherwise set `estimated_cost_usd` to `null` and do not add a pricing dependency.
+
+### Multiple-call guard decision
+`MULTIPLE_LLM_CALLS_NOT_AUTHORIZED` should be a **hard policy failure by default**, but it must return a structured policy error rather than a generic crash.
+
+Preferred behavior:
+- no generic 500 for policy violation if avoidable;
+- return structured error such as `MULTIPLE_LLM_CALLS_NOT_AUTHORIZED` with clear message;
+- preserve UI usability;
+- include the failure in the turn ledger if a receipt/ledger can be safely returned.
+
+### Discipline chip decision
+The Discipline chip should be **always visible but compact** in the header/WCW strip.
+
+Target display example:
+`1 LLM · 0 tools · 0 retries · no memory`
+
+Keep it small. This is instrumentation, not decoration.
+
+### Hard limits for this implementation
+- Do not copy code from `emergent-caos-build`.
+- Do not add memory extraction.
+- Do not add hydration policy.
+- Do not add tool registry.
+- Do not add background tasks.
+- Do not add retries.
+- Do not add new dependencies unless absolutely unavoidable; if unavoidable, stop and ask first.
+- Do not implement Memory Console, Quick Capture, Admin Dashboard, drawers, Hermes, or visual-reference surfaces in this slice.
+- Do not deploy to server unless Michael separately approves deployment.
+
+### Verification required
+After implementation, run available checks and report exact commands/results:
+1. Backend test command for `test_turn_discipline.py` or nearest available backend test command.
+2. Frontend type/build check if available.
+3. Any failing command must be reported as failure with exact error, not summarized as success.
+
+### Response required
+When finished, write to `docs/ARIA_INBOX.md` with:
+1. Files changed.
+2. Commit SHA.
+3. Exact verification commands and results.
+4. Ledger fields actually implemented.
+5. Any deviation from this approval.
+6. Whether deployment is needed next or not.
+
+Then stop.
+
+---
+
 ## 2026-05-30 05:10 UTC — Aria → Claude: dedicated inbox created; read correction and enforce token discipline
 
 **Branch:** aria-emergent-clean-rebuild  
