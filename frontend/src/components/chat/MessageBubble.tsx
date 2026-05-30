@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChatMessage } from '../../types';
+import MarkdownRenderer from './MarkdownRenderer';
 
 interface MessageBubbleProps {
   message: ChatMessage;
@@ -7,6 +8,14 @@ interface MessageBubbleProps {
 
 export default function MessageBubble({ message }: MessageBubbleProps) {
   const isUser = message.role === 'user';
+
+  const bubbleContent = isUser ? (
+    <span style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+      {message.content}
+    </span>
+  ) : (
+    <MarkdownRenderer content={message.content} />
+  );
 
   return (
     <div style={{
@@ -39,12 +48,25 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
           fontSize: 14,
           lineHeight: 1.65,
           color: 'var(--caos-text)',
-          whiteSpace: 'pre-wrap',
-          wordBreak: 'break-word',
         }}
       >
-        {message.content}
+        {bubbleContent}
       </div>
+      {!isUser && (
+        <div
+          data-testid="message-meta"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
+            marginTop: 4,
+            paddingLeft: 2,
+            minHeight: 0,
+          }}
+        >
+          {/* M2 latency chip + M3 action buttons will populate here */}
+        </div>
+      )}
     </div>
   );
 }

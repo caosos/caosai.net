@@ -52,6 +52,13 @@ export const api = {
     }) => request<unknown>('POST', '/memory/atoms', params),
   },
 
+  threads: {
+    list: (user_id: string) =>
+      request<unknown>('POST', '/threads/list', { user_id, limit: 50 }),
+    messages: (thread_id: string, user_id: string = 'dev_user') =>
+      request<unknown>('GET', `/threads/${thread_id}/messages?user_id=${user_id}`),
+  },
+
   auth: {
     devLogin: (user_id: string, is_admin?: boolean) =>
       request<unknown>('POST', '/auth/dev-login', { user_id, is_admin }),

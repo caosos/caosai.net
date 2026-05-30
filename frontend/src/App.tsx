@@ -15,7 +15,7 @@ const SIDEBAR_WIDTH = 200;
 export default function App() {
   const [activeView, setActiveView] = useState<SidebarView>('threads');
 
-  const { threads, activeThread, activeThreadId, loading, newThread, selectThread, sendMessage } =
+  const { threads, activeThread, activeThreadId, loading, lastLatencyMs, totalTokens, newThread, selectThread, sendMessage } =
     useChat();
   const { availableModels, activeModel, selectModel } = useModels();
 
@@ -25,7 +25,7 @@ export default function App() {
     sendMessage(text, activeModel?.provider, activeModel?.model);
   };
 
-  const estimatedTokens = messages.reduce(
+  const displayTokens = totalTokens || messages.reduce(
     (acc, m) => acc + Math.ceil(m.content.length / 3.8),
     0
   );
@@ -57,7 +57,7 @@ export default function App() {
         <Header
           threadTitle={activeThread?.title}
           activeModel={activeModel}
-          tokensUsed={estimatedTokens}
+          tokensUsed={displayTokens}
           onNewThread={newThread}
         />
 
@@ -83,7 +83,8 @@ export default function App() {
               activeModel={activeModel}
               availableModels={availableModels}
               onSelectModel={selectModel}
-              tokensUsed={estimatedTokens}
+              tokensUsed={displayTokens}
+              lastLatencyMs={lastLatencyMs}
             />
           </>
         )}
