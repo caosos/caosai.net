@@ -39,8 +39,9 @@ If you are a human, AI coding agent, or Codex worker, start in this order:
 4. [`docs/visual-reference/README.md`](docs/visual-reference/README.md) — visual-reference evidence rules.
 5. [`docs/ARCHITECTURE_CONCEPTS.md`](docs/ARCHITECTURE_CONCEPTS.md) — memory bins, hydration, receipts, model routing, worker agents, MCP, sandbox lane.
 6. [`docs/CCE_CAOS_CARE_ENGINE_PROPOSAL.md`](docs/CCE_CAOS_CARE_ENGINE_PROPOSAL.md) — CCE trust engine and CAOSCare CCE-lite direction.
-7. [`docs/PUBLIC_ROADMAP.md`](docs/PUBLIC_ROADMAP.md) — public rebuild roadmap.
-8. [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to give feedback or build from the project.
+7. [`docs/CCE_V0_IMPLEMENTATION_NOTES.md`](docs/CCE_V0_IMPLEMENTATION_NOTES.md) — implemented v0.1 deterministic CCE policy skeleton.
+8. [`docs/PUBLIC_ROADMAP.md`](docs/PUBLIC_ROADMAP.md) — public rebuild roadmap.
+9. [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to give feedback or build from the project.
 
 ## Current Status
 
@@ -150,6 +151,7 @@ The public concept is documented in [`docs/CAOSCARE_PRODUCT_PREVIEW.md`](docs/CA
 - [`AGENTS.md`](AGENTS.md)
 - [`docs/CAOS_PUBLIC_OVERVIEW.md`](docs/CAOS_PUBLIC_OVERVIEW.md)
 - [`docs/CCE_CAOS_CARE_ENGINE_PROPOSAL.md`](docs/CCE_CAOS_CARE_ENGINE_PROPOSAL.md)
+- [`docs/CCE_V0_IMPLEMENTATION_NOTES.md`](docs/CCE_V0_IMPLEMENTATION_NOTES.md)
 - [`docs/CAOSCARE_PRODUCT_PREVIEW.md`](docs/CAOSCARE_PRODUCT_PREVIEW.md)
 - [`docs/ARCHITECTURE_CONCEPTS.md`](docs/ARCHITECTURE_CONCEPTS.md)
 - [`docs/PUBLIC_ROADMAP.md`](docs/PUBLIC_ROADMAP.md)
