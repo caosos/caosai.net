@@ -1,6 +1,6 @@
 # CAOS
 
-**CAOS** is an experimental governed AI orchestration platform focused on persistent memory, tool-connected execution, multi-model inference routing, context hygiene, receipts, and practical workflow automation.
+**CAOS** is an experimental governed AI orchestration platform focused on persistent memory, tool-connected execution, multi-model inference routing, context hygiene, receipts, trust-layer verification, and practical workflow automation.
 
 This repository is the public clean-rebuild home for CAOS. It is intended to make the project understandable to humans, AI coding agents, collaborators, and technical reviewers without exposing private CAOSCare implementation details or sensitive operational data.
 
@@ -18,6 +18,7 @@ Core product principles:
 - **Use the model that fits the job.** CAOS is designed for multi-provider inference and future model routing instead of locking every task to one model.
 - **Context should be governed.** Relevant context should be hydrated when useful, sanitized when needed, and backed by receipts.
 - **Tools need rules.** File, repo, connector, MCP, and agent actions should be permissioned, visible, and auditable.
+- **Important answers need checks.** CCE — CAOS Council Engine — is the proposed trust engine for verifier passes, council mode, risk gates, source posture, and receipt-backed synthesis.
 
 In short:
 
@@ -30,14 +31,16 @@ Your rules.
 
 ## Start Here
 
-If you are new to the project, start in this order:
+If you are a human, AI coding agent, or Codex worker, start in this order:
 
-1. [`docs/CAOS_PUBLIC_OVERVIEW.md`](docs/CAOS_PUBLIC_OVERVIEW.md) — plain-English overview.
-2. [`docs/VISUAL_EVIDENCE_MANIFEST.md`](docs/VISUAL_EVIDENCE_MANIFEST.md) — what the working prototype looks like and does.
-3. [`docs/visual-reference/README.md`](docs/visual-reference/README.md) — visual-reference evidence rules.
-4. [`docs/ARCHITECTURE_CONCEPTS.md`](docs/ARCHITECTURE_CONCEPTS.md) — memory bins, hydration, receipts, model routing, worker agents, MCP, sandbox lane.
-5. [`docs/PUBLIC_ROADMAP.md`](docs/PUBLIC_ROADMAP.md) — public rebuild roadmap.
-6. [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to give feedback or build from the project.
+1. [`AGENTS.md`](AGENTS.md) — mandatory agent operating protocol.
+2. [`docs/CAOS_PUBLIC_OVERVIEW.md`](docs/CAOS_PUBLIC_OVERVIEW.md) — plain-English overview.
+3. [`docs/VISUAL_EVIDENCE_MANIFEST.md`](docs/VISUAL_EVIDENCE_MANIFEST.md) — what the working prototype looks like and does.
+4. [`docs/visual-reference/README.md`](docs/visual-reference/README.md) — visual-reference evidence rules.
+5. [`docs/ARCHITECTURE_CONCEPTS.md`](docs/ARCHITECTURE_CONCEPTS.md) — memory bins, hydration, receipts, model routing, worker agents, MCP, sandbox lane.
+6. [`docs/CCE_CAOS_CARE_ENGINE_PROPOSAL.md`](docs/CCE_CAOS_CARE_ENGINE_PROPOSAL.md) — CCE trust engine and CAOSCare CCE-lite direction.
+7. [`docs/PUBLIC_ROADMAP.md`](docs/PUBLIC_ROADMAP.md) — public rebuild roadmap.
+8. [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to give feedback or build from the project.
 
 ## Current Status
 
@@ -62,7 +65,35 @@ CAOS explores the idea that modern AI systems should not only answer questions. 
 - context hydration that pulls the right information at the right time;
 - sanitation and compression that preserve raw source records while keeping active context affordable;
 - explicit learning rather than silent mutation;
-- agent workflows that can inspect, plan, execute, validate, and stop cleanly.
+- agent workflows that can inspect, plan, execute, validate, and stop cleanly;
+- CCE trust-layer modes for fast answers, verified answers, council synthesis, and lockdown/human escalation.
+
+## CCE — CAOS Council Engine
+
+CCE is the proposed CAOS trust engine.
+
+It is not a separate chatbot and not a vendor-specific wrapper. It is the governed orchestration layer that decides when a response should use:
+
+```text
+fast      -> one model / low-risk path
+verified  -> primary model plus verifier / critic
+council   -> multiple bounded workers plus synthesizer plus verifier
+lockdown  -> no AI final answer; human escalation only
+```
+
+The goal is not magical neutrality. The goal is:
+
+```text
+bias-detected
+source-grounded
+contradiction-checked
+risk-gated
+receipt-backed
+audit-visible
+human-governed
+```
+
+See [`docs/CCE_CAOS_CARE_ENGINE_PROPOSAL.md`](docs/CCE_CAOS_CARE_ENGINE_PROPOSAL.md).
 
 ## What The Prototype Already Explored
 
@@ -91,7 +122,9 @@ User request
   -> relevant memory bins
   -> tool / MCP / repo / file access
   -> model routing
+  -> CCE mode selection when trust matters
   -> bounded worker agents where useful
+  -> verifier / gatekeeper where required
   -> receipts and validation
   -> final response / workflow action
 ```
@@ -104,11 +137,19 @@ CAOSCare is the first major product direction planned around the CAOS architectu
 
 CAOSCare is intended as an assistive response and workflow layer, not an autonomous medical decision-maker.
 
+The first CAOSCare CCE profile should be CCE-lite:
+
+```text
+CCE-lite = intent classifier + risk gate + verifier + receipt + human escalation
+```
+
 The public concept is documented in [`docs/CAOSCARE_PRODUCT_PREVIEW.md`](docs/CAOSCARE_PRODUCT_PREVIEW.md). Private CAOSCare implementation code is intentionally not published here.
 
 ## Public Documentation
 
+- [`AGENTS.md`](AGENTS.md)
 - [`docs/CAOS_PUBLIC_OVERVIEW.md`](docs/CAOS_PUBLIC_OVERVIEW.md)
+- [`docs/CCE_CAOS_CARE_ENGINE_PROPOSAL.md`](docs/CCE_CAOS_CARE_ENGINE_PROPOSAL.md)
 - [`docs/CAOSCARE_PRODUCT_PREVIEW.md`](docs/CAOSCARE_PRODUCT_PREVIEW.md)
 - [`docs/ARCHITECTURE_CONCEPTS.md`](docs/ARCHITECTURE_CONCEPTS.md)
 - [`docs/PUBLIC_ROADMAP.md`](docs/PUBLIC_ROADMAP.md)
@@ -123,7 +164,7 @@ The public concept is documented in [`docs/CAOSCARE_PRODUCT_PREVIEW.md`](docs/CA
 - No private care-product implementation details in this public repo.
 - No secrets, tokens, private resident/staff examples, or facility-specific data.
 - Public claims must distinguish prototype, active rebuild, planned feature, and completed feature.
-- AI agents inspecting this repo should read the public docs before making claims.
+- AI agents inspecting this repo should read `AGENTS.md` and the public docs before making claims.
 
 ## License
 
@@ -135,4 +176,4 @@ The agent-runtime space is moving quickly: coding agents, MCP-connected tools, E
 
 CAOS is an attempt to build a broader governed platform around those same primitives, with practical product use cases beyond coding alone.
 
-Feedback is welcome, especially on user-owned memory, privacy-centered personalization, architecture, memory design, orchestration, cost-aware inference, safety boundaries, and product direction.
+Feedback is welcome, especially on user-owned memory, privacy-centered personalization, architecture, memory design, orchestration, cost-aware inference, trust-layer verification, safety boundaries, and product direction.
